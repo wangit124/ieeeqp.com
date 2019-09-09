@@ -75,21 +75,25 @@ WSGI_APPLICATION = 'ieeeqpucsd.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+DATABASES = {
+    'default' : dj_database_url.config(default='mysql://ieeeqpuc_qpuser:234Ar234@162.241.219.116:3306/ieeeqpuc_qpdatabase', conn_max_age=600)
+}
+
 DATABASE_URL = 'mysql://ieeeqpuc_qpuser:234Ar234@162.241.219.116:3306/ieeeqpuc_qpdatabase'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ieeeqpuc_qpdatabase',
-      		'USER': 'ieeeqpuc_qpuser',
-      		'PASSWORD': '234Ar234',
-      		'HOST': '162.241.219.116',
-      		'PORT': '3306',
-    	'OPTIONS': {
-            'sql_mode': 'STRICT_TRANS_TABLES',
-        }
-    }
-}
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'ieeeqpuc_qpdatabase',
+#      		'USER': 'ieeeqpuc_qpuser',
+#      		'PASSWORD': '234Ar234',
+#      		'HOST': '162.241.219.116',
+#      		'PORT': '3306',
+#    	'OPTIONS': {
+#            'sql_mode': 'STRICT_TRANS_TABLES',
+#        }
+#    }
+#}
 
 
 # Password validation
@@ -133,8 +137,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/landing/static/'
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'landing/static'),
+)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
