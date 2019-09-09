@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
     {% load static %}
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon_io/apple-touch-icon.png' %}">
@@ -32,7 +32,7 @@
 
 </head>
 
-<body style="overflow-x: hidden !important;">
+<body>
     {% include 'topnav.html' %}
     {% block body %}{% endblock %}
 </body>
