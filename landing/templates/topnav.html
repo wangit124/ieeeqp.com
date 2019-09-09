@@ -6,7 +6,7 @@
         <a class="navbar-brand" href="/"><img height=60 width=55 src="{% static '/images/icons/QPIcon.png' %}"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggle-label text-white">Menu</span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
@@ -26,11 +26,11 @@
         $(document).on('scroll', () => {
             if ($(this).scrollTop() < 180) {
                 $('nav').addClass('bg-transparent');
-                $('.big-link, .navbar-toggle-label').addClass('text-white');
+                $('.big-link').addClass('text-white');
             }
             else {
                 $('nav').removeClass('bg-transparent');
-                $('.big-link, .navbar-toggle-label').removeClass('text-white');
+                $('.big-link').removeClass('text-white');
             }
         });
 
