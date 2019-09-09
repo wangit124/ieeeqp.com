@@ -1,5 +1,2 @@
 # Text backup files
 *.bak
-
-# Database
-*.sql
