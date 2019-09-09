@@ -25,7 +25,7 @@ SECRET_KEY = 'ip6=&v5+gb_jpjvvrwroonxg6j&uc_jxj&#&gr-b0d-@_k7==q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['162.241.219.116']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -137,12 +137,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/landing/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
+STATIC_URL = '/staticfile/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'landing/static'),
-)
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
