@@ -15,6 +15,10 @@ gd_storage = GoogleDriveStorage()
 # Create your models here.
 class QPApplication(models.Model):
     """Model representing a single QP application."""
+    first_name = models.CharField(max_length=100)
+
+    last_name = models.CharField(max_length=100)
+
     email = models.EmailField(max_length=100)
 
     personal_link = models.URLField(null=True, blank=True, help_text="Link to personal website, portfolio or Github", max_length=200)
@@ -31,10 +35,6 @@ class QPApplication(models.Model):
         default='qp',
         help_text='Which programs would you like to be considered for?',
     )
-
-    first_name = models.CharField(max_length=100)
-
-    last_name = models.CharField(max_length=100)
 
     DEPARTMENT_CHOICES = (
         ('ece', 'Electrical and Computer Engineering'),
@@ -142,7 +142,7 @@ class QPApplication(models.Model):
 
     ieee_member_number = models.CharField(null=True, blank=True, max_length = 100, help_text="IEEE Member Number (Optional)")
 
-    resume_upload = models.FileField(null=True, blank=True, upload_to='/resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
+    resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
 
     class Meta:
         ordering = ['first_name']
