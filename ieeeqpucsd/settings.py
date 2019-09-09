@@ -75,26 +75,25 @@ WSGI_APPLICATION = 'ieeeqpucsd.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#    'default' : dj_database_url.config(default='mysql://ieeeqpuc_qpuser:234Ar234@162.241.219.116:3306/ieeeqpuc_qpdatabase', conn_max_age=600)
+# }
+
 DATABASES = {
-    'default' : dj_database_url.config(default='mysql://ieeeqpuc_qpuser:234Ar234@162.241.219.116:3306/ieeeqpuc_qpdatabase', conn_max_age=600)
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ieeeqpuc_qpdatabase',
+      		'USER': 'ieeeqpuc_qpuser',
+      		'PASSWORD': '234Ar234',
+      		'HOST': '162.241.219.116',
+      		'PORT': '3306',
+    	'OPTIONS': {
+            'sql_mode': 'STRICT_TRANS_TABLES',
+        }
+    }
 }
 
 DATABASE_URL = 'mysql://ieeeqpuc_qpuser:234Ar234@162.241.219.116:3306/ieeeqpuc_qpdatabase'
-
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'ieeeqpuc_qpdatabase',
-#      		'USER': 'ieeeqpuc_qpuser',
-#      		'PASSWORD': '234Ar234',
-#      		'HOST': '162.241.219.116',
-#      		'PORT': '3306',
-#    	'OPTIONS': {
-#            'sql_mode': 'STRICT_TRANS_TABLES',
-#        }
-#    }
-#}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -140,5 +139,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
 STATIC_URL = '/staticfile/'
 
-# Extra places for collectstatic to find static files.
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
