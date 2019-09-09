@@ -1,0 +1,56 @@
+{% extends 'base_generic.html' %}
+
+{% block body %}
+
+{% load widget_tweaks %}
+
+<div style="background: #659DBD !important;">
+  <br><br><br><br><br><br>
+  <div class="container" style="width: '80%' !important;">
+    <h1>Fall 2019 QP/QP++ Application </h1>
+    <h4><a href="/" class="text-white" style="text-decoration: underline;">READ HOME PAGE BEFORE APPLYING</a></h4>
+    <br><br><br>
+    <form method="post" novalidate>
+      {% csrf_token %}
+
+      {% for hidden_field in form.hidden_fields %}
+      {{ hidden_field }}
+      {% endfor %}
+
+      {% if form.non_field_errors %}
+      <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %}
+        {{ error }}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% for field in form.visible_fields %}
+      <div class="form-group">
+        <p class="text-white" style="font-size: 20px; letter-spacing: 0.5px;">
+          {% if field.help_text %}{{ field.help_text }}{% else %}{{ field.label_tag }}{% endif %}</p>
+        {% if form.is_bound %}
+        {% if field.errors %}
+        {% render_field field class="form-control is-invalid" %}
+        {% for error in field.errors %}
+        <div class="invalid-feedback">
+          {{ error }}
+        </div>
+        {% endfor %}
+        {% else %}
+        {% render_field field class="form-control is-valid" %}
+        {% endif %}
+        {% else %}
+        {% render_field field class="form-control" %}
+        {% endif %}
+      </div>
+      <br><br>
+      {% endfor %}
+
+      <button type="submit" class="btn btn-primary btn-lg bg-light" style="color: black !important;">Apply!</button>
+    </form>
+  </div>
+  <br><br><br><br><br><br>
+</div>
+
+{% endblock %}

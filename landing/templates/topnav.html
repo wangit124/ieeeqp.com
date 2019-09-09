@@ -1,0 +1,60 @@
+<!-- Navigation -->
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top bg-transparent animate">
+    <div class="container">
+        <a class="navbar-brand" href="/"><img height=60 width=55 src="{% static '/images/icons/QPIcon.png' %}"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggle-label text-white">Menu</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active animate">
+                    <a class="nav-link big-link text-white animate" href="/">Home</a>
+                </li>
+                <li class="nav-item active animate">
+                    <a class="nav-link big-link text-white animate" href="/apply">Apply</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    $(function () {
+        $(document).on('scroll', () => {
+            if ($(this).scrollTop() < 180) {
+                $('nav').addClass('bg-transparent');
+                $('.big-link, .navbar-toggle-label').addClass('text-white');
+            }
+            else {
+                $('nav').removeClass('bg-transparent');
+                $('.big-link, .navbar-toggle-label').removeClass('text-white');
+            }
+        });
+
+        $('.nav-item').mouseenter(function () {
+            var index = $('.nav-item').index(this);
+            if ($(document).scrollTop() < 180) $('.nav-item').eq(index).css('border-color', 'white');
+            else {
+                $('.nav-item').eq(index).css('background-color', '#02075D');
+                $('.nav-item').css('border-radius', '8px');
+
+                if ($(window).width() < 800) {
+                    $('.nav-item').css('padding-left', '8px');
+                }
+                else {
+                    $('.nav-item').css('padding-left', '0px');
+                }
+
+                $(this).find('.nav-link').css('color', 'white');
+            };
+        }).mouseleave(function () {
+            $('.nav-item').css('border-color', 'transparent');
+            $('.nav-item').css('background-color', 'transparent');
+            $(this).find('.nav-link').css('color', 'black');
+            $('.nav-item').css('border-radius', '0px');
+        });
+    });
+</script>
