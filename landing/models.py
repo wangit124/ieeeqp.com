@@ -2,6 +2,15 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from datetime import date
+from gdstorage.storage import GoogleDriveStorage, GoogleDrivePermissionType, GoogleDrivePermissionRole, GoogleDriveFilePermission
+
+permission = GoogleDriveFilePermission(
+   GoogleDrivePermissionRole.READER,
+   GoogleDrivePermissionType.USER,
+   "foo@mailinator.com"
+)
+
+gd_storage = GoogleDriveStorage()
 
 # Create your models here.
 class QPApplication(models.Model):
@@ -133,7 +142,7 @@ class QPApplication(models.Model):
 
     ieee_member_number = models.CharField(null=True, blank=True, max_length = 100, help_text="IEEE Member Number (Optional)")
 
-    resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
+    resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
 
     class Meta:
         ordering = ['first_name']

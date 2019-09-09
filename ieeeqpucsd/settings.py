@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
    	'landing',
-    'widget_tweaks'
+    'widget_tweaks',
+    'gdstorage',
 ]
 
 MIDDLEWARE = [
@@ -138,5 +139,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
 STATIC_URL = '/staticfile/'
+
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.path.join(BASE_DIR, 'google_drive_credentials/ieeeqpucsd-87d648edb1e9.json')
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
