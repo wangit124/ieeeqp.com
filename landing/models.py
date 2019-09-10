@@ -15,9 +15,9 @@ gd_storage = GoogleDriveStorage()
 # Create your models here.
 class QPApplication(models.Model):
     """Model representing a single QP application."""
-    first_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, help_text="First Name")
 
-    last_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, help_text="Last Name")
 
     email = models.EmailField(max_length=100)
 
@@ -134,7 +134,7 @@ class QPApplication(models.Model):
         max_length=3,
         choices=QUARTER_LONG_CHOICES,
         default='n',
-        help_text='I understand that this is a quarter long obligation and not showcasing my project will negatively on impact my teammates.',
+        help_text='I understand that this is a quarter long obligation and that not showcasing my project will negatively impact my team.',
     )
 
     teammates = models.TextField(null=True, blank=True,
