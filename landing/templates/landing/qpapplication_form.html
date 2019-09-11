@@ -39,6 +39,9 @@
         {% endfor %}
         {% else %}
         {% render_field field class="form-control is-valid" %}
+        {% if field.help_text ends with ' ' %}
+        <small class="form-text text-muted">* This field is optional</small>
+        {% endif %}
         {% endif %}
         {% else %}
         {% render_field field class="form-control" %}
