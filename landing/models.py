@@ -21,7 +21,7 @@ class QPApplication(models.Model):
 
     email = models.EmailField(max_length=100)
 
-    personal_link = models.URLField(null=True, blank=True, help_text="Link to personal website, portfolio or Github ", max_length=200)
+    personal_link = models.URLField(null=True, blank=True, help_text="Link to personal website, portfolio or Github", max_length=200)
 
     PROGRAM_CHOICES = (
         ('qp', 'Quarterly Projects'),
@@ -118,7 +118,7 @@ class QPApplication(models.Model):
         max_length=3000, help_text='Describe a situation where you collaborated with others')
 
     project_motivation = models.TextField(
-        max_length=1000, help_text='In three to four sentences, what motivates you to be on a project? Why do you want to build a project, and what benefit does project experience bring to you and your teammates?')
+        max_length=1000, help_text='In one to two sentences, what motivates you to be on a project? Why do you want to build a project, and what benefit does project experience bring to you and your teammates?')
 
     project_goal_but_not_steps = models.TextField(
         max_length=3000, help_text='Imagine that you know the goal of your project but are unsure of the intermediate steps necessary to achieve it. What would you do to figure out these intermediate steps in order to progress and finish your project?')
@@ -138,11 +138,11 @@ class QPApplication(models.Model):
     )
 
     teammates = models.TextField(null=True, blank=True,
-        max_length=1000, help_text='Hoping to work with other people? Please list their full name, email and major. (eg: John Smith, jsmith@gmail.com, ECE) ')
+        max_length=1000, help_text='Hoping to work with other people? Please list their full name, email and major. (eg: John Smith, jsmith@gmail.com, ECE)')
 
-    ieee_member_number = models.CharField(null=True, blank=True, max_length = 100, help_text='IEEE Member Number ')
+    ieee_member_number = models.CharField(null=True, blank=True, max_length = 100, help_text="IEEE Member Number (Optional)")
 
-    resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format ')
+    resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
 
     class Meta:
         ordering = ['first_name']
