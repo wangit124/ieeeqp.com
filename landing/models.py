@@ -15,11 +15,11 @@ gd_storage = GoogleDriveStorage()
 # Create your models here.
 class QPApplication(models.Model):
     """Model representing a single QP application."""
-    first_name = models.CharField(max_length=100, help_text="First Name")
+    first_name = models.CharField(max_length=100, help_text="First Name *")
 
-    last_name = models.CharField(max_length=100, help_text="Last Name")
+    last_name = models.CharField(max_length=100, help_text="Last Name *")
 
-    email = models.EmailField(max_length=100)
+    email = models.EmailField(max_length=100, help_text="Email *")
 
     personal_link = models.URLField(null=True, blank=True, help_text="Link to personal website, portfolio or Github", max_length=200)
 
@@ -73,6 +73,7 @@ class QPApplication(models.Model):
         max_length=20,
         choices=YEAR_OF_STUDY_CHOICES,
         default='fr',
+        help_text='Year of Study'
     )
 
     HOW_DID_YOU_HEAR_CHOICES = (
@@ -94,13 +95,13 @@ class QPApplication(models.Model):
     )
 
     course_work = models.TextField(
-        max_length=1500, help_text='List any coursework relevant to building projects or working in teams!')
+        max_length=1500, help_text='List any coursework relevant to building projects or working in teams! *')
 
     extracurricular_work = models.TextField(
-        max_length=3000, help_text='List and describe up to 3 extracurricular projects or experiences')
+        max_length=3000, help_text='List and describe up to 3 extracurricular projects or experiences *')
 
     technical_skills = models.TextField(
-        max_length=1000, help_text='List any technical skills you have with a rating from 1 to 5 (eg: Photoshop (5),  AutoCAD (4), Python (3), Excel (1), etc.)')
+        max_length=1000, help_text='List any technical skills you have with a rating from 1 to 5 (eg: Photoshop (5),  AutoCAD (4), Python (3), Excel (1), etc.) *')
     
     MICROCONTROLLER_CHOICES = (
         ('y', 'Yes'),
@@ -115,16 +116,16 @@ class QPApplication(models.Model):
     )
 
     collab_situation = models.TextField(
-        max_length=3000, help_text='Describe a situation where you collaborated with others')
+        max_length=3000, help_text='Describe a situation where you collaborated with others *')
 
     project_motivation = models.TextField(
-        max_length=1000, help_text='In one to two sentences, what motivates you to be on a project? Why do you want to build a project, and what benefit does project experience bring to you and your teammates?')
+        max_length=1000, help_text='In one to two sentences, what motivates you to be on a project? Why do you want to build a project, and what benefit does project experience bring to you and your teammates? *')
 
     project_goal_but_not_steps = models.TextField(
-        max_length=3000, help_text='Imagine that you know the goal of your project but are unsure of the intermediate steps necessary to achieve it. What would you do to figure out these intermediate steps in order to progress and finish your project?')
+        max_length=3000, help_text='Imagine that you know the goal of your project but are unsure of the intermediate steps necessary to achieve it. What would you do to figure out these intermediate steps in order to progress and finish your project? *')
 
     rude_team_member = models.TextField(
-        max_length=3000, help_text='You have a team member that is rude to your team members, does little work, and is in general hard to work with. How do you address this?')
+        max_length=3000, help_text='You have a team member that is rude to your team members, does little work, and is in general hard to work with. How do you address this? *')
 
     QUARTER_LONG_CHOICES = (
         ('y', 'Yes'),

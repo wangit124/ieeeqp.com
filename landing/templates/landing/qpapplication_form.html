@@ -9,7 +9,11 @@
   <div class="container">
     <h1>Fall 2019 QP/QP++ Application </h1>
     <h4><a href="/" class="text-white" style="text-decoration: underline;">READ HOME PAGE BEFORE APPLYING</a></h4>
-    <br><br><br>
+    <br><br>
+    <p class="text-white" style="font-size: 15px; letter-spacing: 0.5px;">
+    * Required
+    </p>
+    <br><br>
     <form method="post" novalidate>
       {% csrf_token %}
 
@@ -39,7 +43,6 @@
         {% endfor %}
         {% else %}
         {% render_field field class="form-control is-valid" %}
-
         {% endif %}
         {% else %}
         {% render_field field class="form-control" %}
