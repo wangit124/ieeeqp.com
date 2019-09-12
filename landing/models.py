@@ -26,14 +26,13 @@ class QPApplication(models.Model):
     PROGRAM_CHOICES = (
         ('qp', 'Quarterly Projects'),
         ('qp2', 'QP++'),
-        ('b', 'Both'),
     )
 
     programs = models.CharField(
         max_length=50,
         choices=PROGRAM_CHOICES,
         default='qp',
-        help_text='Which programs would you like to be considered for?',
+        help_text='Which program would you like to be considered for? *',
     )
 
     DEPARTMENT_CHOICES = (
@@ -58,7 +57,7 @@ class QPApplication(models.Model):
         max_length=100,
         choices=DEPARTMENT_CHOICES,
         default='ece',
-        help_text='Select your department',
+        help_text='Select your department *',
     )
 
     YEAR_OF_STUDY_CHOICES = (
@@ -73,7 +72,7 @@ class QPApplication(models.Model):
         max_length=20,
         choices=YEAR_OF_STUDY_CHOICES,
         default='fr',
-        help_text='Year of Study'
+        help_text='Year of Study *'
     )
 
     HOW_DID_YOU_HEAR_CHOICES = (
@@ -91,7 +90,7 @@ class QPApplication(models.Model):
         max_length=100,
         choices=HOW_DID_YOU_HEAR_CHOICES,
         default='gbm',
-        help_text='How did you hear about Quarterly Projects?',
+        help_text='How did you hear about Quarterly Projects? *',
     )
 
     course_work = models.TextField(
@@ -112,7 +111,7 @@ class QPApplication(models.Model):
         max_length=3,
         choices=MICROCONTROLLER_CHOICES,
         default='y',
-        help_text='Have you used microcontrollers before (Raspberry Pi, Arduino, STM, etc)?',
+        help_text='Have you used microcontrollers before (Raspberry Pi, Arduino, STM, etc)? *',
     )
 
     collab_situation = models.TextField(
@@ -135,13 +134,13 @@ class QPApplication(models.Model):
         max_length=3,
         choices=QUARTER_LONG_CHOICES,
         default='n',
-        help_text='I understand that this is a quarter long obligation and that not showcasing my project will negatively impact my team.',
+        help_text='I understand that this is a quarter long obligation and that not showcasing my project will negatively impact my team. *',
     )
 
     teammates = models.TextField(null=True, blank=True,
         max_length=1000, help_text='Hoping to work with other people? Please list their full name, email and major. (eg: John Smith, jsmith@gmail.com, ECE)')
 
-    ieee_member_number = models.CharField(null=True, blank=True, max_length = 100, help_text="IEEE Member Number (Optional)")
+    ieee_member_number = models.CharField(null=True, blank=True, max_length = 100, help_text="IEEE Member Number")
 
     resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
 
