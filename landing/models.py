@@ -26,13 +26,14 @@ class QPApplication(models.Model):
     PROGRAM_CHOICES = (
         ('qp', 'Quarterly Projects'),
         ('qp2', 'QP++'),
+        ('bo', 'Both')
     )
 
     programs = models.CharField(
         max_length=50,
         choices=PROGRAM_CHOICES,
         default='qp',
-        help_text='Which program would you like to be considered for? *',
+        help_text='Which programs would you like to be considered for? *',
     )
 
     DEPARTMENT_CHOICES = (
