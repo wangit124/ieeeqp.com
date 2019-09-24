@@ -23,6 +23,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('ieeeqpadmin/', admin.site.urls),
     path('', include('landing.urls')),
-    path('dashboard', include('dashboard.urls')),
+    path('dashboard/', include('dashboard.urls')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
