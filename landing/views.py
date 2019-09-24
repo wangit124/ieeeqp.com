@@ -19,3 +19,6 @@ class QPApplicationCreate(CreateView):
 
 def apply_success(request):
     return render(request, 'apply_success.html', context={})
+
+def login(request):
+    return render(request, 'login.html', context={})
