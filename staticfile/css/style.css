@@ -38,3 +38,7 @@ body::-webkit-scrollbar { display: none; }
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
+
+.auth-container {
+    padding: 0 100px;
+}
