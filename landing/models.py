@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from datetime import date
 from gdstorage.storage import GoogleDriveStorage, GoogleDrivePermissionType, GoogleDrivePermissionRole, GoogleDriveFilePermission
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 permission = GoogleDriveFilePermission(
    GoogleDrivePermissionRole.READER,
@@ -15,7 +16,7 @@ gd_storage = GoogleDriveStorage()
 # Create your models here.
 class QPApplication(models.Model):
     """Model representing a single QP application."""
-    score = models.IntegerField()
+    score = models.IntegerField(default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
 
     num_of_scores = models.IntegerField(help_text="# of scorers")
 

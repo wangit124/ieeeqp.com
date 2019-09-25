@@ -32,7 +32,8 @@ def score_applicant(request, appid):
             post_score.application_id = instance.id
             post_score.scorer_id = request.user.id
             post_application.num_of_scores = instance.num_of_scores + 1
-            post_application.score = post_score.score + instance.score
+            cleaned_score = score_form.cleaned_data.get('score')
+            post_application.score = cleaned_score + instance.score
             post_score.save()
             post_application.save()
             return redirect('scoring')
