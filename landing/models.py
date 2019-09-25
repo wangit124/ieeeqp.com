@@ -17,6 +17,8 @@ class QPApplication(models.Model):
     """Model representing a single QP application."""
     score = models.IntegerField()
 
+    num_of_scores = models.IntegerField(help_text="# of scorers")
+
     first_name = models.CharField(max_length=100, help_text="First Name *")
 
     last_name = models.CharField(max_length=100, help_text="Last Name *")

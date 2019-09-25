@@ -31,7 +31,15 @@
 <body>
     {% include 'dash_topnav.html' %}
     {% block body %}{% endblock %}
-    {% include 'scripts.html' %}
+    {% load static %}
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/chart.min.js' %}"></script>
+    <script src="{% static 'js/chart-data.js' %}"></script>
+    <script src="{% static 'js/easypiechart.js' %}"></script>
+    <script src="{% static 'js/easypiechart-data.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
     {% block scripts %}{% endblock %}
 </body>
 

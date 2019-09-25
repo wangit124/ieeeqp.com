@@ -2,14 +2,13 @@
 
 {% block body %}
 <div style="height: 100vh; background: #659DBD !important;">
-    <br><br><br><br><br><br>
-
-    <div class="container" style="width: '50%' !important;">
-
-        <form method="POST">
+    <br><br><br><br><br><br><br><br>
+    <div class="container auth-container">
+        <form method="post">
             {% csrf_token %}
-            {{ form }}
-            <input type="submit" />
+            {% include 'custom-form.html' with form=form %}
+            <br>
+            <button type="submit" class="btn btn-light">Login</button>
         </form>
     </div>
 </div>

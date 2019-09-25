@@ -6,6 +6,6 @@ urlpatterns = [
     path('apply/', views.QPApplicationCreate.as_view(), name='apply'),
     path('success/', views.apply_success, name='apply-success'),
     path('login/', views.login_view, name='login'),
-    path('signup/', views.register_view, name='register'),
+    path('ieeeqpsignup/', views.register_view, name='register'),
     path('logout/', views.logout_view, name='logout'),
 ]
