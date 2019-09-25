@@ -19,7 +19,7 @@ def index(request):
 
 class QPApplicationCreate(CreateView):
     model = QPApplication
-    fields = '__all__'
+    form_class = QPAppModelForm
 
     def get_success_url(self):
         return reverse('apply-success')

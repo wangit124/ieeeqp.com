@@ -15,6 +15,8 @@ gd_storage = GoogleDriveStorage()
 # Create your models here.
 class QPApplication(models.Model):
     """Model representing a single QP application."""
+    score = models.IntegerField()
+
     first_name = models.CharField(max_length=100, help_text="First Name *")
 
     last_name = models.CharField(max_length=100, help_text="Last Name *")
@@ -144,4 +146,4 @@ class QPApplication(models.Model):
     resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
 
     class Meta:
-        ordering = ['first_name']
+        ordering = ['-score']

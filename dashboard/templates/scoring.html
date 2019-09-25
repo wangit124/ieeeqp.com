@@ -1,0 +1,50 @@
+{% extends 'dash_generic.html' %}
+{% block body %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="/dashboard">
+					<em class="fa fa-home"></em>
+				</a></li>
+			<li class="active">Scoring</li>
+		</ol>
+	</div>
+	<!--/.row-->
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Scoring</h1>
+		</div>
+	</div>
+	<!--/.row-->
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="alert bg-blue" role="alert">
+				<div style="display: flex; flex-direction: row; align-items: center;">
+					<span style="display: flex; flex: 0.2;">Total Score</span>
+					<span style="display: flex; flex: 0.2;">Name</span>
+					<span style="display: flex; flex: 0.2;">Year</span>
+					<span style="display: flex; flex: 0.2;">Department</span>
+					<span style="display: flex; flex: 0.2;">Programs</span>
+				</div>
+			</div>
+		</div>
+		{% for app in qpapplications %}
+		<div class="col-lg-12">
+			<div class="alert bg-primary applicant-link" role="alert">
+				<div style="display: flex; flex-direction: row; align-items: center;">
+					<span style="display: flex; flex: 0.2;">{{ app.score }}</span>
+					<span style="display: flex; flex: 0.2;">{{ app.first_name }} {{ app.last_name }}</span>
+					<span style="display: flex; flex: 0.2;">{{ app.get_year_of_study_display }}</span>
+					<span style="display: flex; flex: 0.2;">{{ app.get_department_display }}</span>
+					<span style="display: flex; flex: 0.2;">{{ app.get_programs_display }}</span>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<!--/.row-->
+</div>
+<!--/.main-->
+{% endblock %}
