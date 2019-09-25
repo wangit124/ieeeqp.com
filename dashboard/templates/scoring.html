@@ -22,8 +22,8 @@
 		<div class="col-lg-12">
 			<div class="alert bg-blue" role="alert">
 				<div class="applicant-row">
-					<span class="applicant-field">Score</span>
-					<span class="applicant-field"># of scorers</span>
+					<span class="applicant-field">Average Score</span>
+					<span class="applicant-field">Reviews</span>
 					<span class="applicant-field">Name</span>
 					<span class="applicant-field">Year</span>
 					<span class="applicant-field">Department</span>
@@ -33,9 +33,22 @@
 		</div>
 		{% for app in qpapplications %}
 		<div class="col-lg-12">
+			{% if app.num_of_scores > 4 %}
+			<div class="alert bg-teal applicant-link-disabled" role="alert">
+				<div class="applicant-row">
+					<span class="applicant-field">{% widthratio app.score app.num_of_scores 1 %}</span>
+					<span class="applicant-field">{{ app.num_of_scores }}</span>
+					<span class="applicant-field">{{ app.first_name }} {{ app.last_name }}</span>
+					<span class="applicant-field">{{ app.get_year_of_study_display }}</span>
+					<span class="applicant-field">{{ app.get_department_display }}</span>
+					<span class="applicant-field">{{ app.get_programs_display }}</span>
+				</div>
+			</div>
+			{% else %}
 			<div class="alert bg-primary applicant-link" data="{{ app.id }}" role="alert">
 				<div class="applicant-row" data="{{ app.id }}">
-					<span class="applicant-field" data="{{ app.id }}">{% widthratio app.score app.num_of_scores 1 %}</span>
+					<span class="applicant-field"
+						data="{{ app.id }}">{% widthratio app.score app.num_of_scores 1 %}</span>
 					<span class="applicant-field" data="{{ app.id }}">{{ app.num_of_scores }}</span>
 					<span class="applicant-field" data="{{ app.id }}">{{ app.first_name }} {{ app.last_name }}</span>
 					<span class="applicant-field" data="{{ app.id }}">{{ app.get_year_of_study_display }}</span>
@@ -43,6 +56,7 @@
 					<span class="applicant-field" data="{{ app.id }}">{{ app.get_programs_display }}</span>
 				</div>
 			</div>
+			{% endif %}
 		</div>
 		{% endfor %}
 	</div>

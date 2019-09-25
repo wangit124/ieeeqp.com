@@ -1,19 +1,134 @@
 {% extends 'dash_generic.html' %}
 {% block body %}
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <br>
     <div class="row">
-        <h1>{{ applicant.first_name }}</h1>
-        {% if check_existing %}
-        <div>Already Scored!</div>
-        {% else %}
-        <form method="POST">
-            {% csrf_token %}
-            {{ update_form }}
+        <div class="col-lg-12">
+            <div class="panel panel-blue">
+                <div class="panel-heading dark-overlay">{{ applicant.first_name }} {{ applicant.last_name }}</div>
+                <div class="panel-body">
+                    <div class="col-md-4">
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Year</div>
+                            <div class="panel-body">
+                                {{ applicant.get_year_of_study_display }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Department</div>
+                            <div class="panel-body">
+                                {{ applicant.get_department_display }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Program(s)</div>
+                            <div class="panel-body">
+                                {{ applicant.get_programs_display }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Link to Portfolio</div>
+                            <div class="panel-body custom-white-panel">
+                                {% if applicant.teammates %}{{ applicant.personal_link }}{% else %}None{% endif %}
+                            </div>
+                        </div>
+                    </div>
 
-            {{ score_form }}
-            <input type="submit" />
-        </form>
-        {% endif %}
+                    <div class="col-md-6">
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Technical Skills</div>
+                            <div class="panel-body custom-white-panel">
+                                {{ applicant.technical_skills }}
+                            </div>
+                        </div>
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Used Microcontrollers?</div>
+                            <div class="panel-body custom-white-panel">
+                                {{ applicant.get_microcontrollers_display }}
+                            </div>
+                        </div>
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Coursework</div>
+                            <div class="panel-body custom-white-panel">
+                                {{ applicant.course_work }}
+                            </div>
+                        </div>
+
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">My Motivation</div>
+                            <div class="panel-body custom-white-panel">
+                                {{ applicant.project_motivation }}
+                            </div>
+                        </div>
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">I know the goal but not the steps!</div>
+                            <div class="panel-body custom-white-panel">
+                                {{ applicant.project_goal_but_not_steps }}
+                            </div>
+                        </div>
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Teammates</div>
+                            <div class="panel-body custom-white-panel">
+
+                                {% if applicant.teammates %}{{ applicant.teammates }}{% else %}None{% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Extracurricular</div>
+                            <div class="panel-body custom-white-panel">
+                                {{ applicant.extracurricular_work }}
+                            </div>
+                        </div>
+
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Example of Collaboration</div>
+                            <div class="panel-body custom-white-panel">
+                                {{ applicant.collab_situation }}
+                            </div>
+                        </div>
+                        <div class="panel panel-teal">
+                            <div class="panel-heading dark-overlay">Rude Teammates</div>
+                            <div class="panel-body custom-white-panel">
+                                {{ applicant.rude_team_member }}
+                            </div>
+                        </div>
+                        <div class="custom-input-panel">
+                            {% if check_existing %}
+                            <div>You already scored this applicant!</div>
+                            {% else %}
+                            <form method="post" class="form-inline">
+                                {% csrf_token %}
+                                {{ update_form }}
+                                {% for field in score_form %}
+                                {{ field.errors }}
+                                <label>{{ field.label_tag }} (1=Mediocre, 5=Average, 10=Outstanding) </label>
+                                <div class="custom-input-panel-text">
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                    <p class="help">{{ field.help_text|safe }}</p>
+                                    {% endif %}
+                                    <div class="col-auto my-1">
+                                        <button type="submit" class="btn btn-info">Submit</button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
