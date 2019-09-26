@@ -16,9 +16,9 @@ gd_storage = GoogleDriveStorage()
 # Create your models here.
 class QPApplication(models.Model):
     """Model representing a single QP application."""
-    score = models.IntegerField(default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
+    score = models.IntegerField(null=True, blank=True, default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
 
-    num_of_scores = models.IntegerField(help_text="# of scorers")
+    num_of_scores = models.IntegerField(null=True, blank=True, help_text="# of scorers")
 
     first_name = models.CharField(max_length=100, help_text="First Name *")
 
