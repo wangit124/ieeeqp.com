@@ -14,7 +14,7 @@
 
 {% for field in form.visible_fields %}
 <div class="form-group">
-    {{ field.label_tag }}
+    <h5 class="text-white">{{ field.label_tag }}</h5>
 
     {% if form.is_bound %}
     {% if field.errors %}
@@ -34,5 +34,6 @@
     {% if field.help_text %}
     <small class="form-text text-light">{{ field.help_text }}</small>
     {% endif %}
+    <br>
 </div>
 {% endfor %}
