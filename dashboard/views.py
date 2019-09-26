@@ -25,15 +25,19 @@ def score_applicant(request, appid):
     if request.method == "POST":
         update_form = forms.UpdateQPApplication(request.POST, instance=instance)
         score_form = forms.ScoreApplicationForm(request.POST)
+        safe_num_scores = instance.num_of_scores if instance.num_of_scores else 0
+        safe_score = instance.score if instance.score else 0
 
+        print(safe_num_scores)
+        print(safe_score)
         if score_form.is_valid() and update_form.is_valid():
             post_score = score_form.save(commit=False)
             post_application = update_form.save(commit=False)
             post_score.application_id = instance.id
             post_score.scorer_id = request.user.id
-            post_application.num_of_scores = instance.num_of_scores + 1
+            post_application.num_of_scores = safe_num_scores + 1
             cleaned_score = score_form.cleaned_data.get('score')
-            post_application.score = cleaned_score + instance.score
+            post_application.score = cleaned_score + safe_score
             post_score.save()
             post_application.save()
             return redirect('scoring')

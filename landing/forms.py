@@ -9,8 +9,7 @@ from django.contrib.auth import (
 class QPAppModelForm(forms.ModelForm):
     class Meta:
         model = QPApplication
-        exclude = ('score', 'num_of_scores')
-
+        exclude = ('score', 'num_of_scores', 'resume_upload')
 
 User = get_user_model()
 

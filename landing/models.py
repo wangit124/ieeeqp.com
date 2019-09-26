@@ -16,9 +16,9 @@ gd_storage = GoogleDriveStorage()
 # Create your models here.
 class QPApplication(models.Model):
     """Model representing a single QP application."""
-    score = models.IntegerField(null=True, blank=True, default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
+    score = models.IntegerField(null=True, default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
 
-    num_of_scores = models.IntegerField(null=True, blank=True, help_text="# of scorers")
+    num_of_scores = models.IntegerField(null=True, default=0, help_text="# of scorers")
 
     first_name = models.CharField(max_length=100, help_text="First Name *")
 
@@ -146,7 +146,13 @@ class QPApplication(models.Model):
     teammates = models.TextField(null=True, blank=True,
         max_length=1000, help_text='Hoping to work with other people? Please list their full name, email and major. (eg: John Smith, jsmith@gmail.com, ECE)')
 
-    resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
+    # resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
 
     class Meta:
         ordering = ['-score']
+
+    def clean(self):
+        if self.score is None:
+            self.score = 0
+        if self.num_of_scores is None:
+            self.num_of_scores = 0
