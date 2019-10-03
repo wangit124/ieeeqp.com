@@ -149,7 +149,7 @@ class QPApplication(models.Model):
     # resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
 
     class Meta:
-        ordering = ['-score']
+        ordering = ['score']
 
     def clean(self):
         if self.score is None:

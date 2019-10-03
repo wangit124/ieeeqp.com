@@ -1,0 +1,60 @@
+{% extends 'dash_generic.html' %}
+{% block body %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li class="active">Rubric</li>
+        </ol>
+    </div>
+    <!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">QP Rubric</h1>
+            <div class="qp-rubric">
+                <p>1 = <b>zero</b> effort was put into the application</p>
+                <p>2 = <b>some</b> of the sections are filled out to the best of ability</p>
+                <p>3 = <b>less than half</b> of sections are filled out to the best of ability</p>
+                <p>4 = <b>roughly half</b> of sections are filled out to the best of ability</p>
+                <p>5 = <b>more than half</b> of sections are filled out to the best of ability</p>
+                <p>6 = <b>almost all</b> sections are filled out well, but applicant <b>will not work well in a
+                        group</b> setting</p>
+                <p>7 = <b>all sections</b> are filled out well, but applicant <b>might not work well in a group</b>
+                    setting</p>
+                <p>8 = <b>all sections</b> are filled out well, and applicant <b>will probably work well in a group</b>
+                    setting</p>
+                <p>9 = <b>all sections</b> are filled out well, and applicant <b>will thrive best in a group</b> setting
+                </p>
+                <p>10 = <b>all sections</b> are filled out well, and the applicant <b>displays outstanding potential for
+                        leading</b>
+                    their team</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <h1 class="page-header">QP++ Rubric*</h1>
+            <div class="qp-rubric">
+                <p>1 = <b>zero</b> effort was put into the application</p>
+                <p>2 = <b>some</b> of the sections are filled out to the best of ability</p>
+                <p>3 = <b>less than half</b> of sections are filled out to the best of ability</p>
+                <p>4 = <b>roughly half</b> of sections are filled out to the best of ability</p>
+                <p>5 = <b>more than half</b> of sections are filled out to the best of ability</p>
+                <p>6 = <b>almost all</b> sections are filled out well, but applicant <b>has no technical expertise</b>
+                </p>
+                <p>7 = <b>all sections</b> are filled out well, but applicant <b>has little technical expertise</b></p>
+                <p>8 = <b>all sections</b> are filled out well, and applicant <b>has decent technical expertise</b></p>
+                <p>9 = <b>all sections</b> are filled out well, and applicant <b>has proficient technical expertise</b>
+                </p>
+                <p>10 = <b>all sections</b> are filled out well, and the applicant <b>has outstanding technical
+                        expertise</b></p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <h1 class="page-header">*If they applied for both, use QP++ rubric</h1>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

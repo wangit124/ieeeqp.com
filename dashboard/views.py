@@ -17,6 +17,10 @@ def scoring(request):
     return render(request, 'scoring.html', context)
 
 @login_required
+def rubric(request):
+    return render(request, 'dash_rubric.html', context={})
+
+@login_required
 def score_applicant(request, appid):
     instance = get_object_or_404(QPApplication, id=appid)
     existing = ScoreApplication.objects.filter(scorer_id=request.user.id, application_id=instance.id)

@@ -110,7 +110,8 @@
                                 {{ update_form }}
                                 {% for field in score_form %}
                                 {{ field.errors }}
-                                <label>{{ field.label_tag }} (1=Mediocre, 5=Average, 10=Outstanding) </label>
+                                <label>Score (1 - 10): <a style="color: white; text-decoration: underline;" href="/dashboard/rubric">Read Rubric First</a>
+                                </label>
                                 <div class="custom-input-panel-text">
                                     {{ field }}
                                     {% if field.help_text %}
