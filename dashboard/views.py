@@ -18,7 +18,7 @@ def scoring(request):
     context={
         'unscored_apps': unscored_apps,
         'existing_apps': existing_apps,
-        'all_apps': QPApplication.objects.all(),
+        'all_apps': QPApplication.objects.all().count,
     }
     return render(request, 'scoring.html', context)
 
