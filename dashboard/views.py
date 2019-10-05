@@ -11,8 +11,14 @@ def index(request):
 
 @login_required
 def scoring(request):
+    existing_ids = ScoreApplication.objects.filter(scorer_id=request.user.id).values_list('application_id', flat=True)
+    existing_apps = QPApplication.objects.filter(id__in=existing_ids)
+    unscored_apps = QPApplication.objects.exclude(id__in=existing_ids)
+
     context={
-        'qpapplications': QPApplication.objects.all(),
+        'unscored_apps': unscored_apps,
+        'existing_apps': existing_apps,
+        'all_apps': QPApplication.objects.all(),
     }
     return render(request, 'scoring.html', context)
 
