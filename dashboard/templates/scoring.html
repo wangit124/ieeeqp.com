@@ -127,6 +127,7 @@
 
 {% block scripts %}
 <script>
+	// Highlight applications on hover
 	$('.applicant-link, .applicant-row, .applicant-field').mouseenter(event => {
 		if ($(event.target).attr('class').includes('applicant-link')) {
 			$(event.target).addClass('bg-teal');
@@ -135,12 +136,14 @@
 		$('.applicant-link').removeClass('bg-teal');
 	})
 
+	// Go to application on click
 	$('.applicant-link, .applicant-row, .applicant-field').click(event => {
 		if ($(event.target).attr('data')) {
 			window.location.href = `/dashboard/scoring/${$(event.target).attr('data')}`;
 		}
 	});
 
+	// Filter by scored/unscored
 	$('#all-btn').click(() => {
 		$('#unscored_apps').show();
 		$('#existing_apps').show();
@@ -171,6 +174,7 @@
 		$('#unscored_apps').show();
 	});
 
+	// Search Handler
 	var search_apps = () => {
 		$('#unscored_apps').children().each(function () {
 			if ($(this).context.innerText.toLowerCase().includes($('#search_apps_input').val().toLowerCase())) {
@@ -200,7 +204,14 @@
 		}
 	});
 
+	$(document).ready(function () {
+		var timeoutID = null;
+		$('#search_apps_input').keyup(function (e) {
+			clearTimeout(timeoutID);
+			//timeoutID = setTimeout(findMember.bind(undefined, e.target.value), 500);
+			timeoutID = setTimeout(() => search_apps(), 5);
+		});
 
-
+	});
 </script>
 {% endblock %}
