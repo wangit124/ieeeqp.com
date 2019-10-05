@@ -173,7 +173,7 @@
 
 	var search_apps = () => {
 		$('#unscored_apps').children().each(function () {
-			if ($(this).context.innerText.includes($('#search_apps_input').val())) {
+			if ($(this).context.innerText.toLowerCase().includes($('#search_apps_input').val().toLowerCase())) {
 				$(this).show();
 			}
 			else {
@@ -181,7 +181,7 @@
 			}
 		});
 		$('#existing_apps').children().each(function () {
-			if ($(this).context.innerText.includes($('#search_apps_input').val())) {
+			if ($(this).context.innerText.toLowerCase().includes($('#search_apps_input').val().toLowerCase())) {
 				$(this).show();
 			}
 			else {
