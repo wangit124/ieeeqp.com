@@ -40,7 +40,7 @@
 		<div class="col-lg-12">
 			<div class="alert bg-blue" role="alert">
 				<div class="applicant-row">
-					{% if request.user.is_superuser %}
+					{% if request.user.is_staff %}
 					<span class="applicant-field">Score</span>
 					{% endif %}
 					<span class="applicant-field">Reviews</span>
@@ -57,7 +57,7 @@
 				{% if app.num_of_scores > 4 %}
 				<div class="alert bg-teal applicant-link-disabled" role="alert">
 					<div class="applicant-row">
-						{% if request.user.is_superuser %}
+						{% if request.user.is_staff %}
 						<span class="applicant-field">{% widthratio app.score app.num_of_scores 1 %}</span>
 						{% endif %}
 						<span class="applicant-field">{{ app.num_of_scores }}</span>
@@ -70,7 +70,7 @@
 				{% else %}
 				<div class="alert bg-primary applicant-link" data="{{ app.id }}" role="alert">
 					<div class="applicant-row" data="{{ app.id }}">
-						{% if request.user.is_superuser %}
+						{% if request.user.is_staff %}
 						<span class="applicant-field">{% widthratio app.score app.num_of_scores 1 %}</span>
 						{% endif %}
 						<span class="applicant-field" data="{{ app.id }}">{{ app.num_of_scores }}</span>
@@ -91,7 +91,7 @@
 				{% if app.num_of_scores > 4 %}
 				<div class=" alert bg-teal applicant-link-disabled" role="alert">
 				<div class="applicant-row">
-					{% if request.user.is_superuser %}
+					{% if request.user.is_staff %}
 					<span class="applicant-field">{% widthratio app.score app.num_of_scores 1 %}</span>
 					{% endif %}
 					<span class="applicant-field">{{ app.num_of_scores }}</span>
@@ -104,7 +104,7 @@
 			{% else %}
 			<div class="alert bg-primary applicant-link" data="{{ app.id }}" role="alert">
 				<div class="applicant-row" data="{{ app.id }}">
-					{% if request.user.is_superuser %}
+					{% if request.user.is_staff %}
 					<span class="applicant-field">{% widthratio app.score app.num_of_scores 1 %}</span>
 					{% endif %}
 					<span class="applicant-field" data="{{ app.id }}">{{ app.num_of_scores }}</span>
