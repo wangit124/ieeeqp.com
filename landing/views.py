@@ -12,7 +12,6 @@ from django.contrib.auth import (
     logout
 )
 
-
 def index(request):
     return render(request, 'index.html', context={})
 
@@ -24,10 +23,11 @@ class QPApplicationCreate(CreateView):
     def get_success_url(self):
         return reverse('apply-success')
 
+def apply_closed(request):
+    return render(request, 'apply_closed.html', context={})
 
 def apply_success(request):
     return render(request, 'apply_success.html', context={})
-
 
 def login_view(request):
     next = request.GET.get('next')
