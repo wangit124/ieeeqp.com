@@ -105,13 +105,16 @@
                         <div class="custom-input-panel">
                             {% if check_existing %}
                             <div>You already scored this applicant!</div>
+                            {% elif applicant.num_of_scores > 4 %}
+                            <div>This applicant has already been scored 5 times!</div>
                             {% else %}
                             <form method="post" class="form-inline">
                                 {% csrf_token %}
                                 {{ update_form }}
                                 {% for field in score_form %}
                                 {{ field.errors }}
-                                <label>Score (1 - 10): <a style="color: white; text-decoration: underline;" href="/dashboard/rubric">Read Rubric First</a>
+                                <label>Score (1 - 10): <a style="color: white; text-decoration: underline;"
+                                        href="/dashboard/rubric">Read Rubric First</a>
                                 </label>
                                 <div class="custom-input-panel-text">
                                     {{ field }}
