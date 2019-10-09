@@ -38,6 +38,53 @@
   color: black;
 }
 
+.my-header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 20px;
+}
+
+.create-text {
+  color: white;
+  font-size: 16px;
+  margin: 0;
+}
+
+.large-plus {
+  font-size: 30px;
+}
+
+.btn-text-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #30A5FF;
+  border-radius: 10px;
+  padding: 0px 10px;
+  border: none;
+}
+
+.text-divider {
+  width: 10px;
+}
+
+.member-btn-content {
+  overflow: hidden;
+}
+
+.member-btn-content b{
+  font-weight: 500;
+  color: black;
+}
+
+.members-scroll {
+  height: 400px;
+  overflow-y: scroll;
+}
+
 @media only screen and (max-width: 700px) {
     #qp-banner-flex {
       flex-direction: column;
