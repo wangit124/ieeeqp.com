@@ -54,7 +54,22 @@
 		<div id="unscored_apps">
 			{% for app in unscored_apps %}
 			<div class="col-lg-12">
-				{% if app.num_of_scores > 4 %}
+				{% if app.accepted %}
+				<div class="alert bg-danger applicant-link" data="{{ app.id }}" role="alert">
+					<div class="applicant-row" data="{{ app.id }}">
+						{% if request.user.is_staff %}
+						<span class="applicant-field"
+							data="{{ app.id }}">{% widthratio app.score app.num_of_scores 1 %}</span>
+						{% endif %}
+						<span class="applicant-field" data="{{ app.id }}">{{ app.num_of_scores }}</span>
+						<span class="applicant-field" data="{{ app.id }}">{{ app.first_name }}
+							{{ app.last_name }}</span>
+						<span class="applicant-field" data="{{ app.id }}">{{ app.get_year_of_study_display }}</span>
+						<span class="applicant-field" data="{{ app.id }}">{{ app.get_department_display }}</span>
+						<span class="applicant-field" data="{{ app.id }}">{{ app.get_programs_display }}</span>
+					</div>
+				</div>
+				{% elif app.num_of_scores > 4 %}
 				<div class="alert bg-teal applicant-link-disabled" data="{{ app.id }}" role="alert">
 					<div class="applicant-row" data="{{ app.id }}">
 						{% if request.user.is_staff %}
@@ -91,8 +106,23 @@
 		<div id="existing_apps">
 			{% for app in existing_apps %}
 			<div class="col-lg-12"">
-				{% if app.num_of_scores > 4 %}
-				<div class=" alert bg-teal applicant-link-disabled" data="{{ app.id }}" role="alert">
+			{% if app.accepted %}
+			<div class=" alert bg-danger applicant-link" data="{{ app.id }}" role="alert">
+				<div class="applicant-row" data="{{ app.id }}">
+					{% if request.user.is_staff %}
+					<span class="applicant-field"
+						data="{{ app.id }}">{% widthratio app.score app.num_of_scores 1 %}</span>
+					{% endif %}
+					<span class="applicant-field" data="{{ app.id }}">{{ app.num_of_scores }}</span>
+					<span class="applicant-field" data="{{ app.id }}">{{ app.first_name }}
+						{{ app.last_name }}</span>
+					<span class="applicant-field" data="{{ app.id }}">{{ app.get_year_of_study_display }}</span>
+					<span class="applicant-field" data="{{ app.id }}">{{ app.get_department_display }}</span>
+					<span class="applicant-field" data="{{ app.id }}">{{ app.get_programs_display }}</span>
+				</div>
+			</div>
+			{% elif app.num_of_scores > 4 %}
+			<div class=" alert bg-teal applicant-link-disabled" data="{{ app.id }}" role="alert">
 				<div class="applicant-row" data="{{ app.id }}">
 					{% if request.user.is_staff %}
 					<span class="applicant-field"

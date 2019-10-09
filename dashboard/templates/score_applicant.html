@@ -1,6 +1,17 @@
 {% extends 'dash_generic.html' %}
 {% block body %}
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li class="active"><a style="text-decoration: none; color: #777777;" href="/dashboard/scoring">
+                    Scoring</em>
+                </a></li>
+            <li class="active">{{ applicant.id }}</li>
+        </ol>
+    </div>
     <br>
     <div class="row">
         <div class="col-lg-12">
@@ -103,14 +114,13 @@
                             </div>
                         </div>
                         <div class="custom-input-panel">
-                            {% if check_existing %}
-                            <div>You already scored this applicant!</div>
-                            {% elif applicant.num_of_scores > 4 %}
-                            <div>This applicant has already been scored 5 times!</div>
-                            {% else %}
-                            <form method="post" class="form-inline">
+                            <form method="post" class="form-inline" id="target">
                                 {% csrf_token %}
-                                {{ update_form }}
+                                {% if check_existing %}
+                                <div>You already scored this applicant!</div>
+                                {% elif applicant.num_of_scores > 4 %}
+                                <div>This applicant has already been scored 5 times!</div>
+                                {% else %}
                                 {% for field in score_form %}
                                 {{ field.errors }}
                                 <label>Score (1 - 10): <a style="color: white; text-decoration: underline;"
@@ -126,9 +136,22 @@
                                     </div>
                                 </div>
                                 {% endfor %}
-
-                            </form>
-                            {% endif %}
+                                {% endif %}
+                                <br>
+                                {% for field in update_form %}
+                                <div
+                                    style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center;">
+                                    <label {% if not request.user.is_staff %} style="display: none;" {% endif %}>Accept
+                                        applicant?</label>
+                                    <div {% if not request.user.is_staff %} style="display: none;" {% endif %}
+                                        class="custom-input-panel-text">
+                                        <div style="display: none;">{{ field }}</div>
+                                        <button type="button"
+                                            class="btn btn-info {% if applicant.accepted %} disabled {% endif %}"
+                                            id="accept-btn">{% if applicant.accepted %}&#10004;{% else %}Accept{% endif %}</button>
+                                    </div>
+                                </div>
+                                {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -136,4 +159,18 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('#accept-btn').click(() => {
+        if (!$('#accept-btn').hasClass('disabled')) {
+            $('#accept-btn').addClass('disabled');
+            $('#accept-btn').addClass('btn-primary');
+            $('#accept-btn').html('&#10004;')
+            $('input:checkbox').prop('checked', true);
+            $('#target').submit();
+        }
+    });
+</script>
 {% endblock %}

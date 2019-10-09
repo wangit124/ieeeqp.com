@@ -49,11 +49,19 @@ def score_applicant(request, appid):
             post_score.scorer_id = request.user.id
             post_application.num_of_scores = safe_num_scores + 1
             cleaned_score = score_form.cleaned_data.get('score')
+            cleaned_accept = update_form.cleaned_data.get('accepted')
             post_application.score = cleaned_score + safe_score
+            if (cleaned_accept):
+                post_application.accepted = cleaned_accept
+            else:
+                post_application.accepted = instance.accepted
             post_score.save()
             post_application.save()
             return redirect('scoring')
-
+        
+        if not score_form.is_valid() and update_form.is_valid():
+            update_form.save()
+    
     else:
         update_form = forms.UpdateQPApplication(instance=instance)
         score_form = forms.ScoreApplicationForm()

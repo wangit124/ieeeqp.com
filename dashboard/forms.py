@@ -27,14 +27,16 @@ class ScoreApplicationForm(forms.ModelForm):
 
     def clean(self, *args, **kwargs):
         score = self.cleaned_data.get('score')
-        if score < 0 or score > 10:
+        if  score is None or score < 0 or score > 10:
             raise forms.ValidationError("Please enter a score between 1 and 10!")
         return super(ScoreApplicationForm, self).clean(*args, **kwargs)
 
 class UpdateQPApplication(forms.ModelForm):
     class Meta:
         model = QPApplication
-        fields = ()
+        fields = [
+            'accepted'
+        ]
 
 class CreateTeamForm(forms.ModelForm):
     # using the above customized ModelChoiceField here
