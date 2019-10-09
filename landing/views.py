@@ -11,6 +11,7 @@ from django.contrib.auth import (
     login,
     logout
 )
+from django.contrib.auth.decorators import user_passes_test
 
 def index(request):
     return render(request, 'index.html', context={})
@@ -46,7 +47,7 @@ def login_view(request):
     }
     return render(request, 'login.html', context)
 
-
+@user_passes_test(lambda u: u.is_staff)
 def register_view(request):
     next = request.GET.get('next')
     form = UserRegisterForm(request.POST or None)

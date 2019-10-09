@@ -1,0 +1,167 @@
+{% extends 'dash_generic.html' %}
+{% block body %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li class="active">Teams</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="my-header-row" style="justify-content: space-between;">
+            <h1 class="page-header" style="padding: 0;">Teams</h1>
+            <p class="text-divider"></p>
+            {% if request.user.is_staff %}
+            <button type="button" class="btn-text-row" data-toggle="modal" data-target="#create-team-modal">
+                <p class="create-text">Create</p>
+                <p class="text-divider"></p>
+                <p class="create-text large-plus">+</p>
+            </button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="team-panels">
+            {% for team in teams %}
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading dark-overlay">{{ team.name }} - {{ team.nickname }}</div>
+                    <div class="panel-body custom-white-panel">
+                        <div class="member-list" style="list-style: none;">
+                            {{ team.members }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% load widget_tweaks %}
+<!-- Create Team Modal -->
+<div class="modal fade" id="create-team-modal" tabindex="-1" role="dialog" aria-labelledby="create-team-modal-center"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="POST" class="form-inline">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="my-header-row" style="justify-content: space-between;">
+                        <h3 class="modal-title">Create a New Team</h3>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><b>CLOSE</b></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <h5 class="text-dark">{{ create_team.name.label_tag }}</h5>
+                                {% if create_team.is_bound %}
+                                {% if create_team.name.errors %}
+                                {% render_field create_team.name class="form-control form-control-sm is-invalid" %}
+                                {% for error in create_team.name.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                                {% endfor %}
+                                {% else %}
+                                {% render_field create_team.name class="form-control is-valid" %}
+                                {% endif %}
+                                {% else %}
+                                {% render_field create_team.name class="form-control" %}
+                                {% endif %}
+                                {% if create_team.name.help_text %}
+                                <small class="form-text text-light">{{ create_team.name.help_text }}</small>
+                                {% endif %}
+                                <br>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <h5 class="text-dark">{{ create_team.nickname.label_tag }}</h5>
+                                {% if create_team.is_bound %}
+                                {% if create_team.nickname.errors %}
+                                {% render_field create_team.nickname class="form-control is-invalid" %}
+                                {% for error in create_team.nickname.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                                {% endfor %}
+                                {% else %}
+                                {% render_field create_team.nickname class="form-control is-valid" %}
+                                {% endif %}
+                                {% else %}
+                                {% render_field create_team.nickname class="form-control" %}
+                                {% endif %}
+                                {% if create_team.nickname.help_text %}
+                                <small class="form-text text-light">{{ create_team.nickname.help_text }}</small>
+                                {% endif %}
+                                <br>
+                            </div>
+                        </div>
+                        <br>
+                        <h5 class="text-dark"><b>Add Members:</b></h5>
+
+                        <div class="members-scroll">
+                            <div class="row">
+                                {% for value, member in create_team.member_choices.field.choices %}
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 20px;">
+                                    <button type="button" id="my-member-btn-{{ member.id }}" data-id="{{ member.id }}"
+                                        class="btn btn-md btn-default col-lg-12 col-md-12 col-sm-12 col-xs-12 my-member-btn">
+                                        <div class="member-btn-content" data-id="{{ member.id }}">
+                                            <input type="checkbox" id="my-member-input-{{ member.id }}"
+                                                value="{{ value }}" style="display: none;" name="member_choices"
+                                                data-id="{{ member.id }}">
+                                            <b data-id="{{ member.id }}">{{ member.first_name }}
+                                                {{ member.last_name }}</b><br>
+                                            <b data-id="{{ member.id }}">{{ member.programs }}</b>
+                                            <b data-id="{{ member.id }}">({% widthratio member.score member.num_of_scores 1 %})
+                                            </b>
+                                        </div>
+                                    </button>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('.my-member-btn').click((event) => {
+        if ($(`#my-member-btn-${$(event.target).attr('data-id')}`).hasClass('btn-default')) {
+            $(`#my-member-btn-${$(event.target).attr('data-id')}`).removeClass('btn-default');
+            $(`#my-member-btn-${$(event.target).attr('data-id')}`).addClass('btn-primary');
+            $(`#my-member-input-${$(event.target).attr('data-id')}`).prop('checked', true);
+        }
+        else {
+            $(`#my-member-btn-${$(event.target).attr('data-id')}`).removeClass('btn-primary');
+            $(`#my-member-btn-${$(event.target).attr('data-id')}`).addClass('btn-default');
+            $(`#my-member-input-${$(event.target).attr('data-id')}`).prop('checked', false);
+        }
+    });
+
+    $('#team-panels').children().each(function () {
+        var currentText = $(this).find('.member-list').html().toString();
+        var parsedText = currentText.replace("['", "").replace("']", "").split("', '");
+        var replaceHtml = '';
+        for (let i = 0; i < parsedText.length; i++) {
+            replaceHtml += `<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">${parsedText[i]}</li>`;
+        }
+        $(this).find('.member-list').html(replaceHtml);
+    });
+</script>
+{% endblock %}

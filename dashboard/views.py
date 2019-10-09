@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from landing.models import QPApplication
+from django.contrib.auth.decorators import login_required, user_passes_test
+from landing.models import QPApplication, team
 from dashboard.models import ScoreApplication
 from django.shortcuts import get_object_or_404
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from . import forms
 
 @login_required
@@ -10,6 +11,7 @@ def index(request):
     return render(request, 'dashboard.html', context={})
 
 @login_required
+@user_passes_test(lambda u: u.has_perm('landing.can_score_applicant'))
 def scoring(request):
     existing_ids = ScoreApplication.objects.filter(scorer_id=request.user.id).values_list('application_id', flat=True)
     existing_apps = QPApplication.objects.filter(id__in=existing_ids)
@@ -23,10 +25,12 @@ def scoring(request):
     return render(request, 'scoring.html', context)
 
 @login_required
+@user_passes_test(lambda u: u.has_perm('landing.can_score_applicant'))
 def rubric(request):
     return render(request, 'dash_rubric.html', context={})
 
 @login_required
+@user_passes_test(lambda u: u.has_perm('landing.can_score_applicant'))
 def score_applicant(request, appid):
     instance = get_object_or_404(QPApplication, id=appid)
     existing = ScoreApplication.objects.filter(scorer_id=request.user.id, application_id=instance.id)
@@ -38,8 +42,6 @@ def score_applicant(request, appid):
         safe_num_scores = instance.num_of_scores if instance.num_of_scores else 0
         safe_score = instance.score if instance.score else 0
 
-        print(safe_num_scores)
-        print(safe_score)
         if score_form.is_valid() and update_form.is_valid():
             post_score = score_form.save(commit=False)
             post_application = update_form.save(commit=False)
@@ -64,3 +66,29 @@ def score_applicant(request, appid):
     }
 
     return render(request, 'score_applicant.html', context)
+
+@login_required
+def teams(request):
+    if request.method == "POST":
+        create_team = forms.CreateTeamForm(request.POST)
+        if create_team.is_valid():
+            cleaned_members = create_team.cleaned_data['member_choices']
+            custom_saved_members = create_team.customSave()
+
+            for member in cleaned_members:
+                app_instance = get_object_or_404(QPApplication, id=member.id)
+                update_form = forms.UpdateQPApplication(request.POST, instance=app_instance)
+                post_application = update_form.save(commit=False)
+                post_application.team_id = custom_saved_members.pk
+                post_application.save()
+
+            return redirect('teams')
+    else:
+        create_team = forms.CreateTeamForm()
+    
+    context = {
+        'create_team': create_team,
+        'teams': team.objects.all(),
+    }
+
+    return render(request, 'teams.html', context)

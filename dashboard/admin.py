@@ -1,3 +1,6 @@
 from django.contrib import admin
+from dashboard.models import ScoreApplication
 
-# Register your models here.
+@admin.register(ScoreApplication)
+class ScoreAdmin(admin.ModelAdmin):
+    list_display = ('application', 'scorer', 'score')

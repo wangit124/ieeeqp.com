@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from datetime import date
 from gdstorage.storage import GoogleDriveStorage, GoogleDrivePermissionType, GoogleDrivePermissionRole, GoogleDriveFilePermission
 from django.core.validators import MaxValueValidator, MinValueValidator
+import json
 
 permission = GoogleDriveFilePermission(
    GoogleDrivePermissionRole.READER,
@@ -13,7 +14,22 @@ permission = GoogleDriveFilePermission(
 
 gd_storage = GoogleDriveStorage()
 
-# Create your models here.
+class team(models.Model):
+    name = models.CharField(max_length=100)
+    nickname = models.CharField(max_length=100)
+    members = models.CharField(null=True, blank=True, max_length=200)
+
+    class Meta:
+        permissions = (
+            ('can_create_team', 'Can Create Team'),
+        )
+
+    def set_members(self, arr):
+        self.members = json.dumps(arr)
+
+    def get_members(self):
+        return json.loads(self.members)
+
 class QPApplication(models.Model):
     """Model representing a single QP application."""
     score = models.IntegerField(null=True, default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
@@ -148,8 +164,15 @@ class QPApplication(models.Model):
 
     # resume_upload = models.FileField(null=True, blank=True, upload_to='resumes/', storage=gd_storage, help_text='Please upload your resume in "firstname_lastname_CV.pdf" format')
 
+    team = models.ForeignKey(team, null=True, on_delete=models.SET_NULL)
+
+    accepted = models.BooleanField(default=False)
+    
     class Meta:
         ordering = ['score']
+        permissions = (
+            ('can_score_applicant', 'Can Score Application'),
+        )
 
     def clean(self):
         if self.score is None:

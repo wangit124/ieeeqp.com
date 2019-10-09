@@ -84,7 +84,10 @@
                 </form> -->
     <ul class="nav menu">
         <li><a href="/dashboard"><em class="fa fa-home">&nbsp;</em> Home</a></li>
+        {% if perms.landing.can_score_applicant %}
         <li><a href="/dashboard/scoring"><em class="fa fa-dashboard">&nbsp;</em> Scoring</a></li>
+        {% endif %}
+        <li><a href="/dashboard/teams"><em class="fa fa-user">&nbsp;</em> Teams</a></li>
         <!-- <li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
                     <li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
                     <li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>

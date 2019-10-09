@@ -5,7 +5,6 @@ from django.contrib.auth import (
     get_user_model,
 )
 
-
 class QPAppModelForm(forms.ModelForm):
     class Meta:
         model = QPApplication
