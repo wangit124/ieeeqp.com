@@ -169,7 +169,7 @@ class QPApplication(models.Model):
     accepted = models.BooleanField(default=False)
     
     class Meta:
-        ordering = ['score']
+        ordering = ['-score']
         permissions = (
             ('can_score_applicant', 'Can Score Application'),
         )

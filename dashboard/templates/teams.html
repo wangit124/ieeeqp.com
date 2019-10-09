@@ -104,9 +104,16 @@
                         </div>
                         <br>
                         <h5 class="text-dark"><b>Add Members:</b></h5>
-
+                        <div style="margin-bottom: 18px;" class="sort-btn-row">
+                            <div class="input-group mb-4" style="display: flex; flex-direction: row;">
+                                <input id="search_members_input" type="search"
+                                    placeholder="Filter by Name, Program, Score, etc..." class="form-control">
+                                <button type="button" class="btn-lg btn-primary" id="search_members"
+                                    style="margin-left: -3.5px;"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
                         <div class="members-scroll">
-                            <div class="row">
+                            <div class="row" id="member-rows">
                                 {% for value, member in create_team.member_choices.field.choices %}
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 20px;">
                                     <button type="button" id="my-member-btn-{{ member.id }}" data-id="{{ member.id }}"
@@ -117,7 +124,7 @@
                                                 data-id="{{ member.id }}">
                                             <b data-id="{{ member.id }}">{{ member.first_name }}
                                                 {{ member.last_name }}</b><br>
-                                            <b data-id="{{ member.id }}">{{ member.programs }}</b>
+                                            <b data-id="{{ member.id }}" class="member-programs">{{ member.programs|upper }}</b>
                                             <b data-id="{{ member.id }}">({% widthratio member.score member.num_of_scores 1 %})
                                             </b>
                                         </div>
@@ -145,11 +152,13 @@
         if ($(`#my-member-btn-${$(event.target).attr('data-id')}`).hasClass('btn-default')) {
             $(`#my-member-btn-${$(event.target).attr('data-id')}`).removeClass('btn-default');
             $(`#my-member-btn-${$(event.target).attr('data-id')}`).addClass('btn-primary');
+            $(`#my-member-btn-${$(event.target).attr('data-id')} b`).css('color', 'white');
             $(`#my-member-input-${$(event.target).attr('data-id')}`).prop('checked', true);
         }
         else {
             $(`#my-member-btn-${$(event.target).attr('data-id')}`).removeClass('btn-primary');
             $(`#my-member-btn-${$(event.target).attr('data-id')}`).addClass('btn-default');
+            $(`#my-member-btn-${$(event.target).attr('data-id')} b`).css('color', 'black');
             $(`#my-member-input-${$(event.target).attr('data-id')}`).prop('checked', false);
         }
     });
@@ -162,6 +171,37 @@
             replaceHtml += `<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">${parsedText[i]}</li>`;
         }
         $(this).find('.member-list').html(replaceHtml);
+    });
+
+    // Search Handler
+    var search_members = () => {
+        $('#member-rows').children().each(function () {
+            if ($(this).context.innerText.toLowerCase().includes($('#search_members_input').val().toLowerCase())) {
+                $(this).show();
+            }
+            else {
+                $(this).hide();
+            }
+        });
+    }
+
+    $('#search_members').click(() => {
+        search_members();
+    });
+
+    $('#search_members_input').keypress(function (e) {
+        if (e.which == 13) {
+            search_members();
+        }
+    });
+
+    $(document).ready(function () {
+        var timeoutID = null;
+        $('#search_members_input').keyup(function (e) {
+            clearTimeout(timeoutID);
+            //timeoutID = setTimeout(findMember.bind(undefined, e.target.value), 500);
+            timeoutID = setTimeout(() => search_members(), 5);
+        });
     });
 </script>
 {% endblock %}

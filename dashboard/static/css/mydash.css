@@ -76,7 +76,8 @@
 }
 
 .member-btn-content b{
-  color: white;
+  font-weight: 500;
+  color: black;
 }
 
 .members-scroll {
