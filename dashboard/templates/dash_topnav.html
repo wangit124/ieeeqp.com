@@ -22,13 +22,19 @@
             </div>
             <div class="divider"></div>
             <ul class="nav menu">
+                {% load static %}
                 <li><a href="/dashboard"><em class="fa fa-home">&nbsp;</em> Home</a></li>
                 {% if perms.landing.can_score_applicant %}
                 <li><a href="/dashboard/scoring"><em class="fa fa-dashboard">&nbsp;</em> Scoring</a></li>
                 {% endif %}
-                <li><a href="/dashboard/teams"><em class="fa fa-user">&nbsp;</em><em class="fa fa-user">&nbsp;</em> Teams</a></li>
+                <li><a href="/dashboard/teams"><em class="fa fa-user">&nbsp;</em><em class="fa fa-user">&nbsp;</em>
+                        Teams</a></li>
                 <li><a href="/dashboard/mentors"><em class="fa fa-user">&nbsp;</em>Mentors</a></li>
-                <li><a href="/dashboard/documentation"><em class="fa fa-file-pdf-o">&nbsp;</em>Documents</a></li>
+                <li><a href="/dashboard/documentation"><em class="fa fa-file-pdf-o">&nbsp;</em>Proposal</a></li>
+                <li><a href="{% static 'documents/entrypacket/QP Fall 2019 Entry Packet.pdf' %}"><em
+                            class="fa fa-file-pdf-o">&nbsp;</em>QP Entry Packet</a></li>
+                <li><a href="{% static 'documents/entrypacket/QP++ Fall 2019 Entry Packet.pdf' %}"><em
+                            class="fa fa-file-pdf-o">&nbsp;</em>QP++ Entry Packet</a></li>
                 <li><a href="/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
             </ul>
         </div>
