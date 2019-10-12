@@ -23,16 +23,17 @@
                 </button>
                 {% endif %}
             </div>
+            SORT:
             <button id="qp-btn" type="button" class="btn btn-warning">QP Teams</button>
-            <button id="qp2-btn" type="button" class="btn btn-info">QP++ Teams (Scroll Down)</button>
+            <button id="qp2-btn" type="button" class="btn btn-info">QP++ Teams</button>
         </div>
     </div>
 
     <div class="row">
+        <div class="col-md-12">
+            <h2 id="team-panel-heading" class="page-header" style="padding: 0;">QP</h2>
+        </div>
         <div id="team-panels">
-            <div class="col-md-12">
-                <h2 class="page-header" style="padding: 0;">QP</h2>
-            </div>
             {% for team in qpteams %}
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-warning">
@@ -49,11 +50,10 @@
     </div>
 
     <div class="row">
-
+        <div class="col-md-12">
+            <h2 id="team-panel-heading-2" class="page-header" style="padding: 0;">QP++</h2>
+        </div>
         <div id="team-panels-2">
-            <div class="col-md-12">
-                <h2 class="page-header" style="padding: 0;">QP++</h2>
-            </div>
             {% for team in qp2teams %}
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-info">
@@ -235,13 +235,17 @@
     });
 
     $('#qp-btn').click(() => {
+        $('#team-panel-heading').show();
         $('#team-panels').show();
         $('#team-panels-2').hide();
+        $('#team-panel-heading-2').hide();
     });
 
     $('#qp2-btn').click(() => {
+        $('#team-panel-heading-2').show();
         $('#team-panels').hide();
         $('#team-panels-2').show();
+        $('#team-panel-heading').hide();
     });
 
     $(document).ready(function () {
