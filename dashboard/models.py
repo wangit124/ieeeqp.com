@@ -14,3 +14,4 @@ class ProjectProposal(models.Model):
     team = models.CharField(max_length=300, help_text="Team Name")
     materials = models.CharField(max_length=2000, help_text="Bill of Materials (Eg: 1. Raspberry Pi B+, 3, www.amazon.com, 2. etc...)")
     timeline = models.CharField(max_length=2000, help_text="Timeline of Work (Eg: Week 1 - Design, Week 2 - Build, Week 3 - Polish, etc...)")
+    confidence = models.CharField(max_length=2000, help_text="Collect a sentence from each team member stating why you are confident you will succeed in making this project ")
