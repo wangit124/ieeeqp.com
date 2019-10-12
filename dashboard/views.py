@@ -1,14 +1,27 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from landing.models import QPApplication, team
-from dashboard.models import ScoreApplication
+from dashboard.models import ScoreApplication, ProjectProposal
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from . import forms
+import os
+from ieeeqpucsd import settings
 
 @login_required
 def index(request):
     return render(request, 'dashboard.html', context={})
+
+class ProjectProposalCreate(CreateView):
+    model = ProjectProposal
+    form_class = forms.ProjectProposalForm
+
+    def get_success_url(self):
+        return reverse('documentation-success')
+
+@login_required
+def documentation_success(request):
+    return render(request, 'documentation_success.html', context={})
 
 @login_required
 @user_passes_test(lambda u: u.has_perm('landing.can_score_applicant'))
@@ -100,3 +113,20 @@ def teams(request):
     }
 
     return render(request, 'teams.html', context)
+
+@login_required
+def mentors(request):
+    image_list=[]
+    for root, dirs, files in os.walk(settings.STATIC_ROOT):
+        for file in files:
+            staticUrl = 'staff/'
+            if file.endswith("_mentor.jpg"):
+                staticUrl += file
+                image_list.append(staticUrl)
+    
+    row1 = image_list[0: len(image_list)//4]
+    row2 = image_list[len(image_list)//4: len(image_list)//2]
+    row3 = image_list[len(image_list)//2: len(image_list)*3//4]
+    row4 = image_list[len(image_list)*3//4: len(image_list)]
+
+    return render(request, 'mentors.html', context={ 'row1': row1, 'row2': row2, 'row3': row3, 'row4': row4  })

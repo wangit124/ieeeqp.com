@@ -1,5 +1,5 @@
 from django import forms
-from dashboard.models import ScoreApplication
+from dashboard.models import ScoreApplication, ProjectProposal
 from landing.models import QPApplication, team
 from django.forms import models
 from django.forms.fields import MultipleChoiceField
@@ -31,6 +31,11 @@ class ScoreApplicationForm(forms.ModelForm):
             raise forms.ValidationError("Please enter a score between 1 and 10!")
         return super(ScoreApplicationForm, self).clean(*args, **kwargs)
 
+class ProjectProposalForm(forms.ModelForm):
+    class Meta:
+        model = ProjectProposal
+        fields = '__all__'
+
 class UpdateQPApplication(forms.ModelForm):
     class Meta:
         model = QPApplication
@@ -42,7 +47,7 @@ class CreateTeamForm(forms.ModelForm):
     # using the above customized ModelChoiceField here
     member_choices = AdvancedModelChoiceField(
         widget = forms.CheckboxSelectMultiple,
-        queryset = QPApplication.objects.filter(accepted=True),
+        queryset = QPApplication.objects.filter(accepted=True, team__isnull=True),
         required = False,
         help_text = 'Add members to this team'
     )

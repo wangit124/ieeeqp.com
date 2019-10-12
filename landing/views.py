@@ -16,7 +16,6 @@ from django.contrib.auth.decorators import user_passes_test
 def index(request):
     return render(request, 'index.html', context={})
 
-
 class QPApplicationCreate(CreateView):
     model = QPApplication
     form_class = QPAppModelForm
