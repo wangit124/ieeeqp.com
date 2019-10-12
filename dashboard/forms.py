@@ -47,7 +47,7 @@ class CreateTeamForm(forms.ModelForm):
     # using the above customized ModelChoiceField here
     member_choices = AdvancedModelChoiceField(
         widget = forms.CheckboxSelectMultiple,
-        queryset = QPApplication.objects.filter(accepted=True, team__isnull=True),
+        queryset = QPApplication.objects.all(),
         required = False,
         help_text = 'Add members to this team'
     )

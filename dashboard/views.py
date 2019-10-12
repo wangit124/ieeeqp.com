@@ -109,7 +109,8 @@ def teams(request):
     
     context = {
         'create_team': create_team,
-        'teams': team.objects.all(),
+        'qpteams': team.objects.filter(nickname="QP").order_by('id'),
+        'qp2teams': team.objects.filter(nickname="QP++").order_by('id'),
     }
 
     return render(request, 'teams.html', context)

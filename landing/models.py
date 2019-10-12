@@ -20,6 +20,7 @@ class team(models.Model):
     members = models.CharField(null=True, blank=True, max_length=200)
 
     class Meta:
+        ordering = ['nickname', 'name']
         permissions = (
             ('can_create_team', 'Can Create Team'),
         )
@@ -29,6 +30,7 @@ class team(models.Model):
 
     def get_members(self):
         return json.loads(self.members)
+
 
 class QPApplication(models.Model):
     """Model representing a single QP application."""
