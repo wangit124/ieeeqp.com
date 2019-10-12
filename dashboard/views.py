@@ -17,7 +17,7 @@ class ProjectProposalCreate(CreateView):
     form_class = forms.ProjectProposalForm
 
     def get_success_url(self):
-        return reverse('documentation-success')
+        return reverse('documentation_success')
 
 @login_required
 def documentation_success(request):
