@@ -18,6 +18,7 @@ class team(models.Model):
     name = models.CharField(max_length=100)
     nickname = models.CharField(max_length=100)
     members = models.CharField(null=True, blank=True, max_length=200)
+    mentor = models.ForeignKey(User, null=True, blank=True, on_delete=models.DO_NOTHING)
 
     class Meta:
         ordering = ['nickname', 'name']

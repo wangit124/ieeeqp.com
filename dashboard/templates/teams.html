@@ -23,7 +23,8 @@
                 </button>
                 {% endif %}
             </div>
-            SORT:  <button id="qp-btn" type="button" class="btn btn-warning">QP Teams</button> <button id="qp2-btn" type="button" class="btn btn-info">QP++ Teams</button>
+            SORT: <button id="qp-btn" type="button" class="btn btn-warning">QP Teams</button> <button id="qp2-btn"
+                type="button" class="btn btn-info">QP++ Teams</button>
         </div>
     </div>
 
@@ -35,7 +36,9 @@
             {% for team in qpteams %}
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-warning">
-                    <div class="panel-heading dark-overlay">{{ team.name }} - {{ team.nickname }}</div>
+                    <div class="panel-heading dark-overlay">{{ team.name }} - {{ team.nickname }} <a
+                            class="pull-right btn btn-md btn-primary" href="/dashboard/teams/{{ team.id }}">View
+                            Team</a></div>
                     <div class="panel-body custom-white-panel">
                         <div class="member-list" style="list-style: none;">
                             {{ team.members }}
@@ -55,7 +58,9 @@
             {% for team in qp2teams %}
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-info">
-                    <div class="panel-heading dark-overlay">{{ team.name }} - {{ team.nickname }}</div>
+                    <div class="panel-heading dark-overlay">{{ team.name }} - {{ team.nickname }} <a
+                            class="pull-right btn btn-md btn-warning" href="/dashboard/teams/{{ team.id }}">View
+                            Team</a></div>
                     <div class="panel-body custom-white-panel">
                         <div class="member-list" style="list-style: none;">
                             {{ team.members }}

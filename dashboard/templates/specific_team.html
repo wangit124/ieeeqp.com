@@ -1,0 +1,33 @@
+{% extends 'dash_generic.html' %}
+{% block body %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li class="active">{{ team.name }}</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>{{ team.name }}</h1>
+            <br>
+        </div>
+        <div class="col-lg-12">
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 15px;">{% for mentor in mentor %}<a class="btn btn-primary"><b>Mentor:</b>
+                        {% if mentor %}{{ mentor.first_name }} {{ mentor.last_name }}</a>
+                    {% if mentor.email %} <a href="mailto:{{ mentor.email }}" class="btn btn-warning">Email:
+                        <b>{{ mentor.email }}</b></a>{% endif %} {% else %} Not Assigned {% endif %}
+                    {% endfor %}</li>
+                {% for name, email in team_emails.items %}
+                <li style="margin-bottom: 15px;">{{ name }}: <b><a href="mailto:{{ email }}"
+                            style="color: black;">{{ email }}</b></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
