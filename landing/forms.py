@@ -13,7 +13,7 @@ class QPAppModelForm(forms.ModelForm):
 User = get_user_model()
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(help_text="Username (hint: ieeeqp)")
+    username = forms.CharField(help_text="Hint: ieeeqp")
     password = forms.CharField(widget=forms.PasswordInput)
 
     def clean(self, *args, **kwargs):

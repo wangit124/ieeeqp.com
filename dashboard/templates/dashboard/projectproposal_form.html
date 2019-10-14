@@ -20,9 +20,11 @@
           (Due
           Wednesday, Oct 16th){% endif %}</h1>
         <p class="text-divider"></p>
+        {% if perms.landing.can_score_applicant %}
         <button id="all-btn" type="button" class="btn btn-info">View All</button>
         <button id="qp-btn" type="button" class="btn btn-warning">QP Proposals</button>
         <button id="qp2-btn" type="button" class="btn btn-primary">QP++ Proposals</button>
+        {% endif %}
       </div>
     </div>
   </div>
