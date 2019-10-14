@@ -1,24 +1,33 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from landing.models import QPApplication, team
 from dashboard.models import ScoreApplication, ProjectProposal
-from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from ieeeqpucsd import settings
+from itertools import chain
 from . import forms
 import os
-from ieeeqpucsd import settings
 
 @login_required
 def index(request):
     return render(request, 'dashboard.html', context={})
 
-class ProjectProposalCreate(CreateView):
+class ProjectProposalCreate(LoginRequiredMixin, CreateView):
     model = ProjectProposal
     form_class = forms.ProjectProposalForm
+    proposals_qp = ProjectProposal.objects.filter(program="qp")
+    proposals_qp2 = ProjectProposal.objects.filter(program="qp2")
 
     def get_success_url(self):
         return reverse('documentation_success')
+
+    def get_context_data(self, **kwargs):
+        ctx = super(ProjectProposalCreate, self).get_context_data(**kwargs)
+        ctx['proposals_qp'] = self.proposals_qp
+        ctx['proposals_qp2'] = self.proposals_qp2
+        return ctx
 
 @login_required
 def documentation_success(request):
@@ -192,5 +201,4 @@ def mentors(request):
     row3 = image_list[len(image_list)//2: len(image_list)*3//4]
     row4 = image_list[len(image_list)*3//4: len(image_list)]
 
-    print(email_list)
     return render(request, 'mentors.html', context={ 'row1': row1, 'row2': row2, 'row3': row3, 'row4': row4, 'emails': email_list })

@@ -1,8 +1,7 @@
 from django import forms
 from dashboard.models import ScoreApplication, ProjectProposal
 from landing.models import QPApplication, team
-from django.forms import models
-from django.forms.fields import MultipleChoiceField
+from django.forms import models, Textarea, fields
 
 class AdvancedModelChoiceIterator(models.ModelChoiceIterator):
     def choice(self, obj):
@@ -14,7 +13,7 @@ class AdvancedModelChoiceField(models.ModelMultipleChoiceField):
             return self._choices
         return AdvancedModelChoiceIterator(self)
     
-    choices = property(_get_choices, MultipleChoiceField._set_choices)
+    choices = property(_get_choices, fields.MultipleChoiceField._set_choices)
 
 class ScoreApplicationForm(forms.ModelForm):
     score = forms.IntegerField()
@@ -35,6 +34,12 @@ class ProjectProposalForm(forms.ModelForm):
     class Meta:
         model = ProjectProposal
         fields = '__all__'
+        widgets = {
+          'description': Textarea(attrs={'rows':8, 'cols':50}),
+          'materials': Textarea(attrs={'rows':8, 'cols':50}),
+          'timeline': Textarea(attrs={'rows':8, 'cols':50}),
+          'confidence': Textarea(attrs={'rows':8, 'cols':50}),
+        }
 
 class UpdateQPApplication(forms.ModelForm):
     class Meta:
