@@ -32,106 +32,110 @@
   <div class="row">
     <div class="col-lg-12">
       {% if perms.landing.can_score_applicant %}
-      {% for proposal in proposals_qp %}
-      <div id="qp-panels" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <div class="panel panel-warning">
-          <div class="panel-heading dark-overlay">Team {{ proposal.team_num }} - {{ proposal.get_program_display }}
-          </div>
-          <div class="panel-body">
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Project Title</h5>
+      <div id="qp-panels">
+        {% for proposal in proposals_qp %}
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="panel panel-warning">
+            <div class="panel-heading dark-overlay">Team {{ proposal.team_num }} - {{ proposal.get_program_display }} ({{ proposal.team }})
+            </div>
+            <div class="panel-body">
+              <div class="row" style="margin-bottom: 20px;">
                 <div class="col-lg-12">
-                  {{ proposal.title }}
+                  <h5>Project Title</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.title }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Project Description</h5>
+              <div class="row" style="margin-bottom: 20px;">
                 <div class="col-lg-12">
-                  {{ proposal.description }}
+                  <h5>Project Description</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.description }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Bill of Materials</h5>
+              <div class="row" style="margin-bottom: 20px;">
                 <div class="col-lg-12">
-                  {{ proposal.materials }}
+                  <h5>Bill of Materials</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.materials }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Timeline</h5>
+              <div class="row" style="margin-bottom: 20px;">
                 <div class="col-lg-12">
-                  {{ proposal.timeline }}
+                  <h5>Timeline</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.timeline }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Confidence</h5>
+              <div class="row" style="margin-bottom: 20px;">
                 <div class="col-lg-12">
-                  {{ proposal.confidence }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-      {% for proposal in proposals_qp2 %}
-      <div id="qp2-panels" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <div class="panel panel-info">
-          <div class="panel-heading dark-overlay">Team {{ proposal.team_num }} - {{ proposal.get_program_display }}
-          </div>
-          <div class="panel-body">
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Project Title</h5>
-                <div class="col-lg-12">
-                  {{ proposal.title }}
-                </div>
-              </div>
-            </div>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Project Description</h5>
-                <div class="col-lg-12">
-                  {{ proposal.description }}
-                </div>
-              </div>
-            </div>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Bill of Materials</h5>
-                <div class="col-lg-12">
-                  {{ proposal.materials }}
-                </div>
-              </div>
-            </div>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Timeline</h5>
-                <div class="col-lg-12">
-                  {{ proposal.timeline }}
-                </div>
-              </div>
-            </div>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-lg-12">
-                <h5>Confidence</h5>
-                <div class="col-lg-12">
-                  {{ proposal.confidence }}
+                  <h5>Confidence</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.confidence }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
+      <div id="qp2-panels">
+        {% for proposal in proposals_qp2 %}
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="panel panel-info">
+            <div class="panel-heading dark-overlay">Team {{ proposal.team_num }} - {{ proposal.get_program_display }} ({{ proposal.team }})
+            </div>
+            <div class="panel-body">
+              <div class="row" style="margin-bottom: 20px;">
+                <div class="col-lg-12">
+                  <h5>Project Title</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.title }}
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-bottom: 20px;">
+                <div class="col-lg-12">
+                  <h5>Project Description</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.description }}
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-bottom: 20px;">
+                <div class="col-lg-12">
+                  <h5>Bill of Materials</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.materials }}
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-bottom: 20px;">
+                <div class="col-lg-12">
+                  <h5>Timeline</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.timeline }}
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-bottom: 20px;">
+                <div class="col-lg-12">
+                  <h5>Confidence</h5>
+                  <div class="col-lg-12">
+                    {{ proposal.confidence }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
       {% else %}
       <form method="post" novalidate>
         {% csrf_token %}

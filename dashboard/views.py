@@ -17,16 +17,14 @@ def index(request):
 class ProjectProposalCreate(LoginRequiredMixin, CreateView):
     model = ProjectProposal
     form_class = forms.ProjectProposalForm
-    proposals_qp = ProjectProposal.objects.filter(program="qp")
-    proposals_qp2 = ProjectProposal.objects.filter(program="qp2")
 
     def get_success_url(self):
         return reverse('documentation_success')
 
     def get_context_data(self, **kwargs):
         ctx = super(ProjectProposalCreate, self).get_context_data(**kwargs)
-        ctx['proposals_qp'] = self.proposals_qp
-        ctx['proposals_qp2'] = self.proposals_qp2
+        ctx['proposals_qp'] = ProjectProposal.objects.filter(program="qp").order_by('id')
+        ctx['proposals_qp2'] = ProjectProposal.objects.filter(program="qp2").order_by('id')
         return ctx
 
 @login_required
