@@ -29,3 +29,34 @@ class ProjectProposal(models.Model):
     materials = models.CharField(max_length=2000, help_text="Bill of Materials (Enter a new line for every item. Please provide: name, quantity, vendor-link for each)")
     timeline = models.CharField(max_length=2000, help_text="Timeline of Work (Enter a new line for every week. Please provide: week # and task description for each)")
     confidence = models.CharField(max_length=2000, help_text="Collect a sentence from each member stating why you are confident you will succeed in making this project")
+
+class Milestone(models.Model):
+    REPORT_NUM_CHOICES = (
+        ('1', 'Week 5'),
+        ('2', 'Week 7'),
+    )
+
+    report_num = models.CharField(
+        max_length=50,
+        choices=REPORT_NUM_CHOICES,
+        default='1',
+        help_text='Choose a milestone report',
+    )
+
+    team_num = models.IntegerField(help_text="Team Number (Please enter a number from 1 - 113)")
+
+    PROGRAM_CHOICES = (
+        ('qp', 'QP'),
+        ('qp2', 'QP++'),
+    )
+
+    program = models.CharField(
+        max_length=50,
+        choices=PROGRAM_CHOICES,
+        default='qp',
+        help_text='Program (QP or QP++)',
+    )
+
+    accomplishments = models.CharField(max_length=2000, help_text="What have you accomplished so far?")
+    projected = models.CharField(max_length=2000, help_text="What do you hope to accomplish in the next 5 - 6 weeks?")
+    blockers = models.CharField(max_length=2000, null=True, blank=True, help_text="Name a few issues that are hindering/preventing your progress (Leave blank if none)")

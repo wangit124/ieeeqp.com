@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from landing.models import QPApplication, team
-from dashboard.models import ScoreApplication, ProjectProposal
+from dashboard.models import ScoreApplication, ProjectProposal, Milestone
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from ieeeqpucsd import settings
 from itertools import chain
@@ -25,6 +25,19 @@ class ProjectProposalCreate(LoginRequiredMixin, CreateView):
         ctx = super(ProjectProposalCreate, self).get_context_data(**kwargs)
         ctx['proposals_qp'] = ProjectProposal.objects.filter(program="qp").order_by('id')
         ctx['proposals_qp2'] = ProjectProposal.objects.filter(program="qp2").order_by('id')
+        return ctx
+
+class MilestoneCreate(LoginRequiredMixin, CreateView):
+    model = Milestone
+    form_class = forms.MilestoneReportForm
+
+    def get_success_url(self):
+        return reverse('documentation_success')
+
+    def get_context_data(self, **kwargs):
+        ctx = super(MilestoneCreate, self).get_context_data(**kwargs)
+        ctx['milestone_1'] = Milestone.objects.filter(report_num='1').order_by('id')
+        ctx['milestone_2'] = Milestone.objects.filter(report_num='2').order_by('id')
         return ctx
 
 @login_required

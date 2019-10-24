@@ -1,5 +1,5 @@
 from django import forms
-from dashboard.models import ScoreApplication, ProjectProposal
+from dashboard.models import ScoreApplication, ProjectProposal, Milestone
 from landing.models import QPApplication, team
 from django.forms import models, Textarea, fields
 
@@ -39,6 +39,16 @@ class ProjectProposalForm(forms.ModelForm):
           'materials': Textarea(attrs={'rows':8, 'cols':50}),
           'timeline': Textarea(attrs={'rows':8, 'cols':50}),
           'confidence': Textarea(attrs={'rows':8, 'cols':50}),
+        }
+
+class MilestoneReportForm(forms.ModelForm):
+    class Meta:
+        model = Milestone
+        fields = '__all__'
+        widgets = {
+          'accomplishments': Textarea(attrs={'rows':8, 'cols':50}),
+          'projected': Textarea(attrs={'rows':8, 'cols':50}),
+          'blockers': Textarea(attrs={'rows':8, 'cols':50}),
         }
 
 class UpdateQPApplication(forms.ModelForm):

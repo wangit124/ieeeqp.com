@@ -77,10 +77,6 @@ WSGI_APPLICATION = 'ieeeqpucsd.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = {
-#    'default' : dj_database_url.config(default='mysql://ieeeqpuc_qpuser:234Ar234@162.241.219.116:3306/ieeeqpuc_qpdatabase', conn_max_age=600)
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

@@ -1,0 +1,172 @@
+{% extends 'dash_generic.html' %}
+{% block body %}
+
+{% load widget_tweaks %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li class="active">Milestone Report</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-12" style="margin-bottom: 20px;">
+                <h1 class="page-header" style="padding: 0;">Milestone
+                    Report{% if perms.landing.can_score_applicant %}s{% else %}{% endif %}</h1>
+                <p class="text-divider"></p>
+                {% if perms.landing.can_score_applicant %}
+                <button id="all-btn" type="button" class="btn btn-info">View All</button>
+                <button id="week5-btn" type="button" class="btn btn-warning">Week 5</button>
+                <button id="week7-btn" type="button" class="btn btn-primary">Week 7</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            {% if perms.landing.can_score_applicant %}
+            <div id="week5-panels">
+                {% for milestone in milestone_1 %}
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading dark-overlay">Team {{ milestone.team_num }} -
+                            {{ milestone.get_program_display }}</div>
+                        <div class="panel-body">
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-lg-12">
+                                    <h5>Accomplishments</h5>
+                                    <div class="col-lg-12">
+                                        {{ milestone.accomplishments }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-lg-12">
+                                    <h5>Estimates</h5>
+                                    <div class="col-lg-12">
+                                        {{ milestone.projected }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-lg-12">
+                                    <h5>Blockers</h5>
+                                    <div class="col-lg-12">
+                                        {{ milestone.blockers }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="week7-panels">
+                {% for milestone in milestone_2 %}
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading dark-overlay">Team {{ milestone.team_num }} -
+                            {{ milestone.get_program_display }}</div>
+                        <div class="panel-body">
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-lg-12">
+                                    <h5>Accomplishments</h5>
+                                    <div class="col-lg-12">
+                                        {{ milestone.accomplishments }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-lg-12">
+                                    <h5>Estimates</h5>
+                                    <div class="col-lg-12">
+                                        {{ milestone.projected }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-lg-12">
+                                    <h5>Blockers</h5>
+                                    <div class="col-lg-12">
+                                        {{ milestone.blockers }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+                {% endfor %}
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% for field in form.visible_fields %}
+                <br>
+                <div class="form-group">
+                    <p class="text-white" style="font-size: 20px; letter-spacing: 0.5px;">
+                        {% if field.help_text %}{{ field.help_text }}{% else %}{{ field.label_tag }}{% endif %}</p>
+                    {% if form.is_bound %}
+                    {% if field.errors %}
+                    {% render_field field class="form-control is-invalid" %}
+                    {% for error in field.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    {% render_field field class="form-control is-valid" %}
+                    {% endif %}
+                    {% else %}
+                    {% render_field field class="form-control" %}
+                    {% endif %}
+                </div>
+                <br>
+                {% endfor %}
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-info btn-lg"
+                        style="color: white !important; border-width: 0px !important;">Submit Report</button>
+                </div>
+                <br><br><br><br><br><br><br>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $('#week5-btn').click(() => {
+        $('#week5-panels').show();
+        $('#week7-panels').hide();
+    });
+
+    $('#week7-btn').click(() => {
+        $('#week5-panels').hide();
+        $('#week7-panels').show();
+    });
+
+    $('#all-btn').click(() => {
+        $('#week5-panels').show();
+        $('#week7-panels').show();
+    });
+</script>
+{% endblock %}
