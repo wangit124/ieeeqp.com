@@ -12,4 +12,5 @@ urlpatterns = [
     path('proposal/', views.ProjectProposalCreate.as_view(), name='proposal'),
     path('documentation/success/', views.documentation_success, name='documentation_success'),
     path('milestones/', views.MilestoneCreate.as_view(), name='milestone'),
+    path('workshops/', views.workshops, name='workshop'),
 ]
