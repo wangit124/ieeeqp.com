@@ -58,5 +58,5 @@ class Milestone(models.Model):
     )
 
     accomplishments = models.CharField(max_length=2000, help_text="What have you accomplished so far?")
-    projected = models.CharField(max_length=2000, help_text="What do you hope to accomplish in the next 5 - 6 weeks?")
+    projected = models.CharField(max_length=2000, help_text="What do you hope to accomplish in the next 2 weeks?")
     blockers = models.CharField(max_length=2000, null=True, blank=True, help_text="Name a few issues that are hindering/preventing your progress (Leave blank if none)")
