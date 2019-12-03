@@ -8,12 +8,13 @@ from django.contrib.auth import (
 class QPAppModelForm(forms.ModelForm):
     class Meta:
         model = QPApplication
-        exclude = ('score', 'num_of_scores', 'resume_upload')
+        exclude = ('score', 'num_of_scores', 'resume_upload', 'team', 'accepted')
 
 User = get_user_model()
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(help_text="Hint: ieeeqp")
+    # username = forms.CharField(help_text="Hint: ieeeqp")
+    username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
     def clean(self, *args, **kwargs):
