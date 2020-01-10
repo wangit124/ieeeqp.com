@@ -13,4 +13,5 @@ urlpatterns = [
     path('documentation/success/', views.documentation_success, name='documentation_success'),
     path('milestones/', views.MilestoneCreate.as_view(), name='milestone'),
     path('workshops/', views.workshops, name='workshop'),
+    path('calendar/', views.calendar, name="calendar"),
 ]

@@ -215,5 +215,9 @@ def mentors(request):
     return render(request, 'mentors.html', context={ 'row1': row1, 'row2': row2, 'row3': row3, 'row4': row4, 'emails': email_list })
 
 @login_required
+def calendar(request):
+    return render(request, 'calendar.html', context={})
+
+@login_required
 def workshops(request):
     return render(request, 'workshops.html', context={})
