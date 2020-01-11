@@ -39,7 +39,7 @@ class Milestone(models.Model):
     report_num = models.CharField(
         max_length=50,
         choices=REPORT_NUM_CHOICES,
-        default='2',
+        default='1',
         help_text='Choose a milestone report',
     )
 

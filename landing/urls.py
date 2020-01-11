@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from datetime import date
 
-deadline = date(2020, 1, 12)
+deadline = date(2020, 1, 15)
 today = date.today()
 
 if (today >= deadline):
