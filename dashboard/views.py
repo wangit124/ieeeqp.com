@@ -142,49 +142,26 @@ def teams(request):
 
 @login_required
 def specific_team(request, teamid):
+    # Get specific team using id
     team_instance = get_object_or_404(team, id=teamid)
-    members = team_instance.members.replace("['", "").replace("']", "").split("', '")
-    program = team_instance.nickname
+
+    # Get QPApplicant and update
+    members = QPApplication.objects.filter(team_id=teamid)
+
+    # Get mentor
     mentor = User.objects.filter(id=team_instance.mentor_id)
 
-    if program == 'QP':
-        program = 'qp'
-    else:
-        program = 'qp2'
+    # get email
+    emails = members.values('email')
 
-    emails = {}
-
-    for member in members:
-        name = member.split(" ")
-        first_name = name[0]
-        if len(name) > 2:
-            for i in range(1, len(name) - 1):
-                first_name += " "
-                first_name += name[i]
-
-        last_name = name[len(name) - 1]
-
-        # Get QPApplicant and update
-        applicant = QPApplication.objects.filter(programs=program, first_name__contains=first_name, last_name__contains=last_name)
-
-        # update applicant instance
-        for applicant_id in applicant.values('id'):
-            applicant_instance = get_object_or_404(QPApplication, id=applicant_id['id'])
-            update_applicant = forms.UpdateQPApplication(request.POST, instance=applicant_instance)
-            update_commit_false = update_applicant.save(commit=False)
-            update_commit_false.accepted=1
-            update_commit_false.team_id=teamid
-            update_commit_false.save()
-
-        # get email
-        email = applicant.values('email')
-
-        for e in email:
-            emails[member] = e['email']
+    # list of emails
+    team_emails = {}
+    for i in range(0, len(emails)):
+        team_emails[members[i].first_name + ' ' + members[i].last_name] = emails[i]['email']
 
     context = {
         'team': team_instance,
-        'team_emails': emails,
+        'team_emails': team_emails,
         'mentor': mentor,
     }
     return render(request, 'specific_team.html', context)
