@@ -145,7 +145,19 @@ def specific_team(request, teamid):
     # Get specific team using id
     team_instance = get_object_or_404(team, id=teamid)
 
-    # Get QPApplicant and update
+    # Backfilling
+    backfill_members = team_instance.members.replace("['", "").replace("']", "").split("', '")
+
+    # Assign team id to each person on team
+    for member in backfill_members:
+        name = member.split(" ", 1)
+        person = QPApplication.objects.filter(first_name=name[0]).filter(last_name=name[1]).first()
+        update_form = forms.UpdateQPApplication(request.POST, instance=person)
+        post_application = update_form.save(commit=False)
+        post_application.team_id = teamid
+        post_application.save()
+
+    # Get QPApplicant
     members = QPApplication.objects.filter(team_id=teamid)
 
     # Get mentor
