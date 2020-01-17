@@ -155,6 +155,7 @@ def specific_team(request, teamid):
         update_form = forms.UpdateQPApplication(request.POST, instance=person)
         post_application = update_form.save(commit=False)
         post_application.team_id = teamid
+        post_application.accepted = 1
         post_application.save()
 
     # Get QPApplicant
