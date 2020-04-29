@@ -17,4 +17,5 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('ieeeqpsignup/', views.register_view, name='register'),
     path('logout/', views.logout_view, name='logout'),
+    # path('.well-known/acme-challenge/579nh20yWm02orHMdz28CwPMtC8QWlMOjNEjIz8b9T4/', views.https_view, name='https'),
 ]
