@@ -4,3 +4,4 @@ python manage.py migrate
 git add .
 git commit -m "deploying ieeeqp"
 git push origin master
+git push heroku master
