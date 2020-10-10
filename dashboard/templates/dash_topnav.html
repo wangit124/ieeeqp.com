@@ -12,10 +12,10 @@
             <div class="profile-sidebar">
                 <div class="profile-userpic">
                     {% load static %}
-                    <img src="{% static 'images/icons/QPIcon.png' %}" class="img-responsive" alt="">
+                    <img src="{% static 'images/icons/qp-logo-2020.png' %}" height=100 width=90 class="img-responsive" alt="">
                 </div>
                 <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">{{ user.get_username }}</div>
+                    <div class="profile-usertitle-name">IEEE QP</div>
                     <div class="profile-usertitle-status"><span class="indicator label-success"></span>Active</div>
                 </div>
                 <div class="clear"></div>
@@ -24,14 +24,14 @@
             <ul class="nav menu">
                 {% load static %}
                 <li><a href="/dashboard"><em class="fa fa-home">&nbsp;</em> Home</a></li>
-                {% if perms.landing.can_score_applicant %}
+                <!-- {% if perms.landing.can_score_applicant %}
                 <li><a href="/dashboard/scoring"><em class="fa fa-dashboard">&nbsp;</em> Scoring</a></li>
-                {% endif %}
+                {% endif %} -->
                 <!-- href="/dashboard/teams" -->
-                <li><a href="https://ieeeqp2020.devpost.com/participants"><em class="fa fa-user">&nbsp;</em><em
-                            class="fa fa-user">&nbsp;</em>Teams</a></li>
+                <!-- <li><a href="https://ieeeqp2020.devpost.com/participants"><em class="fa fa-user">&nbsp;</em><em
+                            class="fa fa-user">&nbsp;</em>Teams</a></li> -->
                 <li><a href="/dashboard/mentors"><em class="fa fa-user">&nbsp;</em> Mentors</a></li>
-                <li><a href="https://ieeeqp2020.devpost.com/details/dates"><em class="fa fa-calendar">&nbsp;</em> Schedule</a></li>
+                <!-- <li><a href="https://ieeeqp2020.devpost.com/details/dates"><em class="fa fa-calendar">&nbsp;</em> Schedule</a></li> -->
                 <!-- <li><a href="{% static 'documents/entrypacket/winter/QP Winter 2020 Entry Packet.pdf' %}"><em
                             class="fa fa-file-pdf-o">&nbsp;</em> QP Entry</a></li> -->
                 <!-- <li><a href="{% static 'documents/entrypacket/winter/QP++ Winter 2020 Entry Packet.pdf' %}"><em
@@ -39,7 +39,7 @@
                 <li><a href="/dashboard/workshops"><em class="fa fa-wrench">&nbsp;</em> Workshops</a></li>
                 <li><a href="/dashboard/proposal"><em class="fa fa-folder">&nbsp;</em> Proposal</a></li>
                 <li><a href="/dashboard/milestones"><em class="fa fa-flag">&nbsp;</em> Milestones</a></li>
-                <li><a href="/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+                <li><a href="/login"><em class="fa fa-power-off">&nbsp;</em> Login</a></li>
             </ul>
         </div>
     </div>

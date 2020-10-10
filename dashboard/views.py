@@ -10,11 +10,12 @@ from itertools import chain
 from . import forms
 import os
 
-@login_required
+# @login_required
 def index(request):
     return render(request, 'dashboard.html', context={})
 
-class ProjectProposalCreate(LoginRequiredMixin, CreateView):
+#(LoginRequiredMixin, CreateView)
+class ProjectProposalCreate(CreateView):
     model = ProjectProposal
     form_class = forms.ProjectProposalForm
 
@@ -27,7 +28,8 @@ class ProjectProposalCreate(LoginRequiredMixin, CreateView):
         ctx['proposals_qp2'] = ProjectProposal.objects.filter(program="qp2").order_by('id')
         return ctx
 
-class MilestoneCreate(LoginRequiredMixin, CreateView):
+#(LoginRequiredMixin, CreateView)
+class MilestoneCreate(CreateView):
     model = Milestone
     form_class = forms.MilestoneReportForm
 
@@ -40,11 +42,11 @@ class MilestoneCreate(LoginRequiredMixin, CreateView):
         ctx['milestone_2'] = Milestone.objects.filter(report_num='2').order_by('id')
         return ctx
 
-@login_required
+# @login_required
 def documentation_success(request):
     return render(request, 'documentation_success.html', context={})
 
-@login_required
+# @login_required
 @user_passes_test(lambda u: u.has_perm('landing.can_score_applicant'))
 def scoring(request):
     existing_ids = ScoreApplication.objects.filter(scorer_id=request.user.id).values_list('application_id', flat=True)
@@ -58,12 +60,12 @@ def scoring(request):
     }
     return render(request, 'scoring.html', context)
 
-@login_required
+# @login_required
 @user_passes_test(lambda u: u.has_perm('landing.can_score_applicant'))
 def rubric(request):
     return render(request, 'dash_rubric.html', context={})
 
-@login_required
+# @login_required
 @user_passes_test(lambda u: u.has_perm('landing.can_score_applicant'))
 def score_applicant(request, appid):
     instance = get_object_or_404(QPApplication, id=appid)
@@ -180,7 +182,7 @@ def specific_team(request, teamid):
     return render(request, 'specific_team.html', context)
 
 
-@login_required
+# @login_required
 def mentors(request):
     image_list=[]
     email_list={}
@@ -208,6 +210,6 @@ def mentors(request):
 def calendar(request):
     return render(request, 'calendar.html', context={})
 
-@login_required
+# @login_required
 def workshops(request):
     return render(request, 'workshops.html', context={})
